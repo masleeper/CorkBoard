@@ -1,0 +1,15 @@
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\bin\Debug\CorkBoard.exe.config
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\bin\Debug\CorkBoard.exe
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\bin\Debug\CorkBoard.pdb
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard.csprojAssemblyReference.cache
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\MainWindow.g.cs
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\App.g.cs
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard_MarkupCompile.cache
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard_MarkupCompile.lref
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\MainWindow.baml
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard.g.resources
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard.Properties.Resources.resources
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard.csproj.GenerateResource.cache
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard.csproj.CoreCompileInputs.cache
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard.exe
+C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\CorkBoard.pdb
