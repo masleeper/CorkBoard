@@ -1,7 +1,7 @@
 ﻿CorkBoard
 
 
-winexe
+exe
 C#
 .cs
 C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\obj\Debug\
@@ -16,5 +16,5 @@ C:\Users\nibarder\source\repos\CorkBoard\CorkBoard\App.xaml
 15-2074476083
 MainWindow.xaml;
 
-False
+True
 

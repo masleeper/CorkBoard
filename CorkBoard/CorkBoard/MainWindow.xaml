@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CorkBoard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Image Debug Window" Height="450" Width="450">
+    <Grid Background="#FF212121">
+        <Image x:Name="ImageBox" HorizontalAlignment="Left" Height="231" Margin="52,83,0,0" VerticalAlignment="Top" Width="340"/>
+
     </Grid>
 </Window>

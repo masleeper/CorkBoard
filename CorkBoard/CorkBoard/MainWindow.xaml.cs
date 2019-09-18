@@ -24,7 +24,8 @@ namespace CorkBoard
         public MainWindow()
         {
             InitializeComponent();
-            Test.runTests();
+            Show();
+            
         }
     }
 }
