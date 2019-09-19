@@ -16,6 +16,7 @@ using CorkBoard.UnitTests;
 using CorkBoard.Network;
 using CorkBoard.Core;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace CorkBoard
 {
@@ -31,25 +32,20 @@ namespace CorkBoard
 
             Weather weather = new Weather();
             Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
-            TextBlock weatherText = new TextBlock();
             if (weatherInfo.temp == -12345)
             {
-                weatherText.Text = "Can't get weather data at this time.";
+                TempBlock.Text = "N/A";
             }
             else
             {
-                weatherText.Text = "temp: " + weatherInfo.temp + " humidity: " + weatherInfo.humidity;
+                TempBlock.Text = weatherInfo.temp + "\u00B0F";
             }
 
-            IniFile settings = new IniFile("C:\\Users\\Me\\Documents\\cs408\\CorkBoard\\CorkBoard\\CorkBoard\\settings.ini");
-            Debug.WriteLine("userimg path: " + settings.Read("userimg"));
+           
             ImageBox.Source = new BitmapImage(new Uri("../../surprise.PNG", UriKind.Relative));
-            WeatherPanel.Children.Add(weatherText);
-
-            TextBlock timeText = new TextBlock();
-            timeText.Text = DateTime.Now.ToString("h:mm tt");
-            timeText.FontSize = 30;
-            TimePanel.Children.Add(timeText);
+            TimeBlock.Text = DateTime.Now.ToString("h:mm tt");
+            DayBlock.Text = DateTime.Now.DayOfWeek.ToString();
+            DateBlock.Text = DateTime.Now.ToString("MMMM dd,yyyy", CultureInfo.InvariantCulture);
             Show();
         }
     }
