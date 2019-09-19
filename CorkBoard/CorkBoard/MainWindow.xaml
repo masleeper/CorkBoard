@@ -5,9 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CorkBoard"
         mc:Ignorable="d"
-        Title="Image Debug Window" Height="450" Width="450">
+        Title="Image Debug Window" 
+        Height="768"
+        Width="1366">
     <Grid Background="#FF212121">
-        <Image x:Name="ImageBox" HorizontalAlignment="Left" Height="231" Margin="52,83,0,0" VerticalAlignment="Top" Width="340"/>
+        <Image x:Name="ImageBox" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="150" Margin="0,10,0,0"/>
+
+        <StackPanel x:Name="WeatherPanel" Background="White" Height="400" Width="250" Margin="202,10,908,328.4" />
+        <StackPanel x:Name="AnnoucePanel" Background="White" Height="400" Width="250" Margin="497,10,613,328.4">
+            <!--TEMPORARY TEXTBLOCK DELETE WHEN ANNOUNCEMENTS ARE IMPLEMENTED-->
+            <TextBlock TextWrapping="Wrap">No announcements available at this time</TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="TimePanel" Background="White" Margin="10,576,1016,10.4"/>
+        <StackPanel x:Name="NewsPanel" Background="White" Height="400" Width="250" Margin="1100,10,10,328.4">
+            <!--TEMPORARY TEXTBLOCK DELETE WHEN NEWS IS IMPLMENTED-->
+            <TextBlock TextWrapping="Wrap">News not available at this time</TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="BusPanel" Background="White" Height="400" Width="250" Margin="804,10,306,328.4">
+            <TextBlock TextWrapping="Wrap" Margin="0,0,-0.6,0"><Run Text="Bus not available at this time"/></TextBlock>
+            <!--TEMPORARY TEXTBLOCK DELETE WHEN BUS IS IMPLMENTED-->
+        </StackPanel>
 
     </Grid>
 </Window>

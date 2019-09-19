@@ -61,6 +61,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\HelperFunctions.cs" />
+    <Compile Include="Core\IniFile.cs" />
     <Compile Include="Network\Announcement.cs" />
     <Compile Include="Network\Net.cs" />
     <Compile Include="Network\Weather.cs" />
@@ -101,12 +102,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="settings.ini" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="surprise.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

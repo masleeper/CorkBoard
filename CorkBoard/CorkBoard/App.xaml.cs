@@ -16,14 +16,15 @@ namespace CorkBoard
     {
         public App()
         {
-            MainWindow mw = new MainWindow();
+            // uncomment everything below to use the debug windows
+/*            MainWindow mw = new MainWindow();
             string cmd = "";
             Console.Out.WriteLine("This is a debug window for the application.");
             Console.Out.WriteLine("Available commands are:");
             Console.Out.WriteLine("TEST ALL\nTest NET\nTEST WEATHER\nSHOW WEATHER [<station code>]\nNETGET <URL>");
             Console.Out.Write(">");
             cmd = Console.In.ReadLine();
-            while (true)
+            while (false)
             {
                 if (cmd.ToLower().Equals("exit"))
                 {
@@ -81,10 +82,10 @@ namespace CorkBoard
                         Console.Out.WriteLine("INVALID SYNTAX");
                     }
                 }
-                
+
                 Console.Out.Write(">");
-                cmd = Console.In.ReadLine();
-            }
+              cmd = Console.In.ReadLine();
+            } */
         }
 
     }

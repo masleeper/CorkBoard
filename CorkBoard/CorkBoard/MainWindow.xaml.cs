@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CorkBoard.UnitTests;
+using CorkBoard.Network;
+using CorkBoard.Core;
+using System.Diagnostics;
 
 namespace CorkBoard
 {
@@ -24,8 +27,31 @@ namespace CorkBoard
         public MainWindow()
         {
             InitializeComponent();
+           
+
+            Weather weather = new Weather();
+            Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
+            TextBlock weatherText = new TextBlock();
+            if (weatherInfo.temp == -12345)
+            {
+                weatherText.Text = "Can't get weather data at this time.";
+            }
+            else
+            {
+                weatherText.Text = "temp: " + weatherInfo.temp + " humidity: " + weatherInfo.humidity;
+            }
+
+            IniFile settings = new IniFile("C:\\Users\\Me\\Documents\\cs408\\CorkBoard\\CorkBoard\\CorkBoard\\settings.ini");
+            Debug.WriteLine("userimg path: " + settings.Read("userimg"));
+            Debug.WriteLine("project dir: " + System.IO.Directory.GetCurrentDirectory().ToString());
+            ImageBox.Source = new BitmapImage(new Uri("surprise.PNG"));
+            WeatherPanel.Children.Add(weatherText);
+
+            TextBlock timeText = new TextBlock();
+            timeText.Text = DateTime.Now.ToString("h:mm tt");
+            timeText.FontSize = 30;
+            TimePanel.Children.Add(timeText);
             Show();
-            
         }
     }
 }
