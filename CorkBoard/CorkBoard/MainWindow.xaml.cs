@@ -43,8 +43,7 @@ namespace CorkBoard
 
             IniFile settings = new IniFile("C:\\Users\\Me\\Documents\\cs408\\CorkBoard\\CorkBoard\\CorkBoard\\settings.ini");
             Debug.WriteLine("userimg path: " + settings.Read("userimg"));
-            Debug.WriteLine("project dir: " + System.IO.Directory.GetCurrentDirectory().ToString());
-            ImageBox.Source = new BitmapImage(new Uri("surprise.PNG"));
+            ImageBox.Source = new BitmapImage(new Uri("../../surprise.PNG", UriKind.Relative));
             WeatherPanel.Children.Add(weatherText);
 
             TextBlock timeText = new TextBlock();
