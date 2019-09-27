@@ -46,20 +46,13 @@ namespace CorkBoard
 
             Weather weather = new Weather();
             Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
-            if (weatherInfo.temp == -12345)
-            {
-                TempBlock.Text = "N/A";
-            }
-            else
-            {
-                TempBlock.Text = weatherInfo.temp + "\u00B0F";
-            }
+            updateTemp(weatherInfo.temp);
 
-           
-            ImageBox.Source = new BitmapImage(new Uri("../../surprise.PNG", UriKind.Relative));
+            //ImageBox.Source = new BitmapImage(new Uri("../../surprise.PNG", UriKind.Relative));
+            ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
             TimeBlock.Text = DateTime.Now.ToString("h:mm tt");
             DayBlock.Text = DateTime.Now.DayOfWeek.ToString();
-            DateBlock.Text = DateTime.Now.ToString("MMMM dd,yyyy", CultureInfo.InvariantCulture);
+            DateBlock.Text = DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture);
             Show();
 
             timer = new System.Windows.Forms.Timer();
@@ -81,17 +74,26 @@ namespace CorkBoard
                     updateTime(lastWrittenTime);
                     Console.WriteLine("Update clock to " + lastWrittenTime);
                 }
+                string currentDate = DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture);
+                if (DateBlock.Text.CompareTo(currentDate) != 0)
+                {
+                    updateDate(currentDate);
+                }
             }
 
             wxtimer = ++wxtimer % settings.getWeatherRefresh();
             if (wxtimer == 0)
             {
+                Weather weather = new Weather();
+                Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
+                updateTemp(weatherInfo.temp);
                 Console.WriteLine("Update weather.");
             }
 
             imgtimer = ++imgtimer % settings.getImgRefresh();
             if (imgtimer == 0)
             {
+                ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
                 Console.WriteLine("Update image.");
             }
 
@@ -111,9 +113,16 @@ namespace CorkBoard
             DateBlock.Text = date;
         }
 
-        public void updateTemp(string temp)
+        public void updateTemp(int temp)
         {
-            TempBlock.Text = temp;
+            if (temp == -12345)
+            {
+                TempBlock.Text = "N/A";
+            } else
+            {
+                TempBlock.Text = temp.ToString() + "\u00B0F";
+            }
+            
         }
     }
 }

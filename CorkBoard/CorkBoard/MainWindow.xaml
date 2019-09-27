@@ -10,11 +10,11 @@
         Width="1366">
     <Grid Background="#FF212121">
         <Grid Background="#000000">
-            <TextBlock x:Name="TimeBlock" Foreground="White" FontSize="100" Margin="27,-12,839,628.4">10:34 PM</TextBlock>
-            <TextBlock x:Name="DayBlock" Foreground="White" FontSize="50" Margin="566,0,515,671.4">Wednesday</TextBlock>
-            <TextBlock x:Name="DateBlock" Foreground="White" FontSize="30" Margin="566,71,515,616.4">September 19, 2019</TextBlock>
-            <TextBlock x:Name="TempBlock" Foreground="White" FontSize="80" Margin="955,10,222,629.4" >80</TextBlock>
-            <StackPanel x:Name="MainView" Background="#FF212121" Margin="0,127,187,0.4">
+            <TextBlock x:Name="TimeBlock" Foreground="White" Height="127.6" Width="500" FontSize="100" Margin="27,-12,839,628.4">10:34 PM</TextBlock>
+            <TextBlock x:Name="DayBlock" Foreground="White" Width="316" FontSize="50" Margin="566,0,476,657">Wednesday</TextBlock>
+            <TextBlock x:Name="DateBlock" Foreground="White" Height="70" Width="316" FontSize="30" Margin="566,73,476,594">September 19, 2019</TextBlock>
+            <TextBlock x:Name="TempBlock" Foreground="White" Height="158.6" Width="189" FontSize="80" Margin="955,10,222,629.4" >80</TextBlock>
+            <StackPanel x:Name="MainView" Width="1187" Height="641" Background="#FF212121" Margin="0,127,179,0">
                 <Image x:Name="ImageBox" Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
             </StackPanel>
         </Grid>
