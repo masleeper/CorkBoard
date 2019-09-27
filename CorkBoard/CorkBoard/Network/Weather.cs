@@ -28,7 +28,7 @@ namespace CorkBoard.Network
             info.windDirection = -12345;
             info.windSpeed = -12345;
             info.msg = "-12345";
-            if(apiCall == null || apiCall == "")
+            if (apiCall == null || apiCall == "")
             {
                 return info;
             }
@@ -54,7 +54,6 @@ namespace CorkBoard.Network
                 if (wJson["temperature"] == null || wJson["temperature"]["value"] == null ||
                     wJson["relativeHumidity"] == null || wJson["relativeHumidity"]["value"] == null ||
                     wJson["textDescription"] == null || wJson["textDescription"] == null ||
-                    wJson["windDirection"] == null || wJson["windDirection"]["value"] == null ||
                     wJson["windSpeed"] == null || wJson["windSpeed"]["value"] == null)
                 {
                     return info;
@@ -64,11 +63,12 @@ namespace CorkBoard.Network
                     info.temp = (int)((float)wJson["temperature"]["value"] * 1.8) + 32;
                     info.humidity = (int)wJson["relativeHumidity"]["value"];
                     info.msg = (String)wJson["textDescription"];
-                    info.windDirection = (int)wJson["windDirection"]["value"];
+                    info.windDirection = wJson["windDirection"]["value"]!=null ?(int)wJson["windDirection"]["value"] : -1;
                     info.windSpeed = (int)wJson["windSpeed"]["value"];
 
                 }
-            }catch (Exception)
+            }
+            catch (Exception)
             {
                 return info;
             }
