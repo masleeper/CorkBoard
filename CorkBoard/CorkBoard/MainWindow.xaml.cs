@@ -45,6 +45,10 @@ namespace CorkBoard
             wxtimer = 0;
             imgtimer = 0;
             lastWrittenTime = DateTime.Now.ToString("hh:mm tt");
+            OuterView.Background = new SolidColorBrush(settings.getOuterColor());
+            MainView.Background = new SolidColorBrush(settings.getInnerColor());
+            setOuterTextColor(settings.getOuterTextColor());
+            setInnerTextColor(settings.getInnerTextColor());
 
             Weather weather = new Weather();
             Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
@@ -62,7 +66,19 @@ namespace CorkBoard
             timer.Tick += new System.EventHandler(timerTick);
             timer.Start();
         }
+        
+        private void setOuterTextColor(Color color)
+        {
+            TimeBlock.Foreground = new SolidColorBrush(color);
+            DayBlock.Foreground = new SolidColorBrush(color);
+            DateBlock.Foreground = new SolidColorBrush(color);
+            TempBlock.Foreground = new SolidColorBrush(color);
+        }
 
+        private void setInnerTextColor(Color color)
+        {
+            // TODO: set all elements in mainview to color
+        }
 
         private void timerTick(object sender, EventArgs e)
         {

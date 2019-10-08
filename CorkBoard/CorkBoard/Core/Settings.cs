@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Reflection;
+using System.Windows.Media;
 
 namespace CorkBoard.Core
 {
@@ -18,9 +19,14 @@ namespace CorkBoard.Core
         private int imgrefresh = 120; //Time in seconds to refresh image - Lower means quicker refresh.
         private int clkrefresh = 5; //Time in seconds to check clock - Lower means higher accuracy but potentially more problems. Not sure this should be a user-defined global, but adding it in for now.
         private int[] btheme = new int[12]; //Contains a basic color scheme, four RGB values. Background1, Text1, Background2, Color2.
-
+        private Color outerColor, outerTextColor, innerColor, innerTextColor;
+     
         public Settings()
         {
+            outerColor = new Color();
+            outerTextColor = new Color();
+            innerColor = new Color();
+            innerTextColor = new Color();
             getSettings();
         }
 
@@ -74,6 +80,26 @@ namespace CorkBoard.Core
             return clkrefresh;
         }
 
+        public Color getOuterColor()
+        {
+            return outerColor;
+        }
+
+        public Color getOuterTextColor()
+        {
+            return outerTextColor;
+        }
+
+        public Color getInnerColor()
+        {
+            return innerColor;
+        }
+
+        public Color getInnerTextColor()
+        {
+            return innerTextColor;
+        }
+
         public bool getSettings() //Reads CorkBoard.ini and populates the globals with accurate values.
         //returns true if initializers were read okay, false if any issue arose.
         {
@@ -117,6 +143,11 @@ namespace CorkBoard.Core
                                             return false;
                                         }
                                     }
+
+                                    outerColor = (Color) ColorConverter.ConvertFromString(colorString(btheme[0], btheme[1], btheme[2]));
+                                    outerTextColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[3], btheme[4], btheme[5]));
+                                    innerColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[6], btheme[7], btheme[8]));
+                                    innerTextColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[9], btheme[10], btheme[11]));
                                 }
                                 catch (FormatException) //If it's not a valid int
                                 {
@@ -142,6 +173,10 @@ namespace CorkBoard.Core
             return true;
         }
 
+        private string colorString(int r, int g, int b)
+        {
+            return "#FF" + r.ToString("X2") + g.ToString("X2") + b.ToString("X2");
+        }
         /*public void checkData()
         {
             if (!getSettings())
