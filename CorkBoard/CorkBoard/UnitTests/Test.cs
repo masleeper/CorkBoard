@@ -23,6 +23,7 @@ namespace CorkBoard.UnitTests
         {
             new NetworkTests().runNetworkTests();
             new NetworkTests().runWeatherTests();
+            new NetworkTests().runForecastTests();
         }
     }
 }

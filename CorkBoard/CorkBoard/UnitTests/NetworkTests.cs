@@ -29,9 +29,20 @@ namespace CorkBoard.UnitTests
             
         }
 
+        public void runForecastTests()
+        {
+            Console.WriteLine("----- Starting Forecast Tests -----");
+            Test.PrintTest("Valid Forecast API: ", testValidForecast());
+            Test.PrintTest("Invalid Forecast API: ", testInvalidForecast());
+            Test.PrintTest("Empty Forecast API: ", testEmptyForecast());
+
+            Console.WriteLine("------- Forecast Tests End -------\n\n");
+
+        }
+
         //test web section
         #region
-            private bool testValidCall()
+        private bool testValidCall()
         {
             string a = new Net().getWebText("https://api.weather.gov/");
             if (!a.Equals("error"))
@@ -105,6 +116,49 @@ namespace CorkBoard.UnitTests
         #endregion
 
         //test get announcements
+
+        //test get forecast
+        #region
+        public bool testValidForecast()
+        {
+            Forecast f = new Forecast();
+            List<Forecast.ForecastData> data = f.getForecast("https://api.weather.gov/gridpoints/IND/40,70/forecast?units=us");
+            //if one value is null all is null
+            //only need to check 1 value to exist
+            if (data.Count > 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public bool testInvalidForecast()
+        {
+            Forecast f = new Forecast();
+            List<Forecast.ForecastData> data = f.getForecast("https://api.weather.gov/gridpoints/INZ/40,70/forecast?units=us");
+            //if one value is null all is null
+            //only need to check 1 value to exist
+            if (data.Count == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public bool testEmptyForecast()
+        {
+            Forecast f = new Forecast();
+            List<Forecast.ForecastData> data = f.getForecast("");
+            //if one value is null all is null
+            //only need to check 1 value to exist
+            if (data.Count == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+        #endregion
 
 
     }
