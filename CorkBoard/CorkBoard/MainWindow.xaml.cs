@@ -54,6 +54,18 @@ namespace CorkBoard
             Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
             updateTemp(weatherInfo.temp);
 
+            //trying to create text boxes for posts 
+            List<Announcement> announcements = new GetAnnouncements().getAnnouncements("https://kassarl.github.io/corkboardjson/announcements.json");
+            TextBlock[] textBoxes = new TextBlock[announcements.Count];
+
+            for(int i = 0; i < announcements.Count; i++) 
+            {
+                PostController post = new PostController();
+                post.setBody(announcements[i].getBody());
+                post.setTitle(announcements[i].getTitle());
+                MainView.Children.Add(post); 
+            }
+
             //ImageBox.Source = new BitmapImage(new Uri("../../surprise.PNG", UriKind.Relative));
             ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
             TimeBlock.Text = DateTime.Now.ToString("h:mm tt");
@@ -141,6 +153,11 @@ namespace CorkBoard
                 TempBlock.Text = temp.ToString() + "\u00B0F";
             }
             
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
