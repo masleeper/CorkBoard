@@ -45,23 +45,8 @@ namespace CorkBoard
             wxtimer = 0;
             imgtimer = 0;
             lastWrittenTime = DateTime.Now.ToString("hh:mm tt");
-            OuterView.Background = new SolidColorBrush(settings.getOuterColor());
-            MainView.Background = new SolidColorBrush(settings.getInnerColor());
-            setOuterTextColor(settings.getOuterTextColor());
-            setInnerTextColor(settings.getInnerTextColor());
 
-            Weather weather = new Weather();
-            Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
-            updateTemp(weatherInfo.temp);
-
-            ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
-            TimeBlock.Text = DateTime.Now.ToString("h:mm tt");
-            DayBlock.Text = DateTime.Now.DayOfWeek.ToString();
-            DateBlock.Text = DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture);
-
-            Forecast forecast = new Forecast();
-            List<Forecast.ForecastData> data = forecast.getForecast("https://api.weather.gov/gridpoints/IND/40,70/forecast?units=us");
-            updateForecast(data);
+            updateUI();
             Show();
 
             timer = new System.Windows.Forms.Timer();
@@ -174,7 +159,76 @@ namespace CorkBoard
                     numShown++;
                 }
             }
-            Console.WriteLine("data count: " + data.Count);
+        }
+
+        public void openSettingsView(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow(settings, this);
+            sw.Show();
+        }
+
+        public void updateSettings(Settings newSettings)
+        {
+            this.settings = newSettings;
+            updateUI();
+        }
+        
+        /*
+         * This method is solely to be used on startup and when new settings are loaded in
+         */
+        public void updateUI()
+        {
+            OuterView.Background = new SolidColorBrush(settings.getOuterColor());
+            MainView.Background = new SolidColorBrush(settings.getInnerColor());
+            setOuterTextColor(settings.getOuterTextColor());
+            setInnerTextColor(settings.getInnerTextColor());
+
+            if (settings.isWeatherVisible())
+            {
+                TempBlock.Visibility = Visibility.Visible;
+                ForecastView.Visibility = Visibility.Visible;
+                Weather weather = new Weather();
+                Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
+                updateTemp(weatherInfo.temp);
+
+                Forecast forecast = new Forecast();
+                List<Forecast.ForecastData> data = forecast.getForecast("https://api.weather.gov/gridpoints/IND/40,70/forecast?units=us");
+                updateForecast(data);
+            } else
+            {
+                TempBlock.Visibility = Visibility.Collapsed;
+                ForecastView.Visibility = Visibility.Collapsed;
+            }
+            
+            if (settings.isImageVisible())
+            {
+                ImageBox.Visibility = Visibility.Visible;
+                ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
+            } else
+            {
+                ImageBox.Visibility = Visibility.Collapsed;
+            }
+           
+            if (settings.isTimeVisible())
+            {
+                TimeBlock.Visibility = Visibility.Visible;
+                TimeBlock.Text = DateTime.Now.ToString("h:mm tt");
+            } else
+            {
+                TimeBlock.Visibility = Visibility.Collapsed;
+            }
+            
+            if (settings.isDateVisible())
+            {
+                DayBlock.Visibility = Visibility.Visible;
+                DateBlock.Visibility = Visibility.Visible;
+                updateDay(DateTime.Now.DayOfWeek.ToString());
+                updateDate(DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture));
+            } else
+            {
+                DateBlock.Visibility = Visibility.Collapsed;
+                DayBlock.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

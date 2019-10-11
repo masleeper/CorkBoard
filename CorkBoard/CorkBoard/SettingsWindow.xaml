@@ -1,0 +1,51 @@
+﻿<Window x:Class="CorkBoard.SettingsWindow"
+        Closing="settingsClose"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CorkBoard"
+        mc:Ignorable="d"
+        Title="Settings" Height="450" Width="800">
+    <Grid Background="#212121">
+        <TextBlock Foreground="White" Height="60" FontSize="40" Margin="10,1,0,361">Settings</TextBlock>
+        <StackPanel Orientation="Horizontal" Margin="10,82,0,309">
+            <TextBlock Padding="0,0,5,0" Foreground="White">Time</TextBlock>
+            <RadioButton x:Name="showTime" Foreground="White" Padding="5,0,5,0">Show</RadioButton>
+            <RadioButton x:Name="hideTime" Foreground="White" Padding="5,0,5,0">Hide</RadioButton>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,112,0,279">
+            <TextBlock Padding="0,0,5,0" Foreground="White">Date</TextBlock>
+            <RadioButton x:Name="showDate" Foreground="White" Padding="5,0,5,0">Show</RadioButton>
+            <RadioButton x:Name="hideDate" Foreground="White" Padding="5,0,5,0">Hide</RadioButton>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,142,0,253">
+            <TextBlock Padding="0,0,5,0" Foreground="White">Weather</TextBlock>
+            <RadioButton x:Name="showWeather" Foreground="White" Padding="5,0,5,0">Show</RadioButton>
+            <RadioButton x:Name="hideWeather" Foreground="White" Padding="5,0,5,0">Hide</RadioButton>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="10,173,0,218">
+            <TextBlock Padding="0,0,5,0" Foreground="White">Image</TextBlock>
+            <RadioButton x:Name="showImage" Foreground="White" Padding="5,0,5,0">Show</RadioButton>
+            <RadioButton x:Name="hideImage" Foreground="White" Padding="5,0,5,0">Hide</RadioButton>
+        </StackPanel>
+        <!--Color Settings-->
+        <StackPanel Orientation="Horizontal" Margin="296,83,-286,309">
+            <TextBlock Padding="0,0,5,0" Foreground="White">Outer Background Color (ex. #FF123DEF)</TextBlock>
+            <TextBox x:Name="OuterBg" Width="100" ></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="296,129,-286,263">
+            <TextBlock Padding="0,0,5,0" Foreground="White">Inner Background Color (ex. #FF123DEF)</TextBlock>
+            <TextBox x:Name="InnerBg" Width="100" ></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="296,174,-286,218">
+            <TextBlock Padding="0,0,5,0" Foreground="White">Outer Text Color (ex. #FF123DEF)</TextBlock>
+            <TextBox x:Name="OuterText" Width="100" ></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="296,222,-286,170">
+            <TextBlock Padding="0,0,5,0" Foreground="White">Inner  Text Color (ex. #FF123DEF)</TextBlock>
+            <TextBox x:Name="InnerText" Width="100" ></TextBox>
+        </StackPanel>
+        <Button Content="Save" Click="saveSettings" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="75"/>
+    </Grid>
+</Window>

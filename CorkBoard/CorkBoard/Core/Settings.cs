@@ -11,7 +11,7 @@ using System.Windows.Media;
 
 namespace CorkBoard.Core
 {
-    class Settings
+    public class Settings
     {
         private string wxurl; //Full URL for weather API in our zone. In the future, maybe replace with zip code and structure an appropriate API link on our own?
         private string imgurl; //Full URL for image to display.
@@ -20,6 +20,7 @@ namespace CorkBoard.Core
         private int clkrefresh = 5; //Time in seconds to check clock - Lower means higher accuracy but potentially more problems. Not sure this should be a user-defined global, but adding it in for now.
         private int[] btheme = new int[12]; //Contains a basic color scheme, four RGB values. Background1, Text1, Background2, Color2.
         private Color outerColor, outerTextColor, innerColor, innerTextColor;
+        private bool timeVisible, dateVisible, weatherVisible, imageVisible;
      
         public Settings()
         {
@@ -28,6 +29,50 @@ namespace CorkBoard.Core
             innerColor = new Color();
             innerTextColor = new Color();
             getSettings();
+            timeVisible = true;
+            dateVisible = true;
+            weatherVisible = true;
+            imageVisible = true;
+        }
+
+        public bool isTimeVisible()
+        {
+            return timeVisible;
+        }
+
+        public void setTimeVisible(bool timeVisible)
+        {
+            this.timeVisible = timeVisible;
+        }
+
+        public bool isDateVisible()
+        {
+            return dateVisible;
+        }
+
+        public void setDateVisible(bool dateVisible)
+        {
+            this.dateVisible = dateVisible;
+        }
+
+        public bool isWeatherVisible()
+        {
+            return weatherVisible;
+        }
+
+        public bool isImageVisible()
+        {
+            return imageVisible;
+        }
+
+        public void setImageVisible(bool imageVisible)
+        {
+            this.imageVisible = imageVisible;
+        }
+
+        public void setWeatherVisible(bool weatherVisible)
+        {
+            this.weatherVisible = weatherVisible;
         }
 
         public void setWeatherUrl(string url)
@@ -85,9 +130,19 @@ namespace CorkBoard.Core
             return outerColor;
         }
 
+        public void setOuterColor(string hexColor)
+        {
+            outerColor = (Color)ColorConverter.ConvertFromString(hexColor);
+        }
+
         public Color getOuterTextColor()
         {
             return outerTextColor;
+        }
+
+        public void setOuterTextColor(string hexColor)
+        {
+            outerTextColor = (Color)ColorConverter.ConvertFromString(hexColor);
         }
 
         public Color getInnerColor()
@@ -95,10 +150,21 @@ namespace CorkBoard.Core
             return innerColor;
         }
 
+        public void setInnerColor(string hexColor)
+        {
+            innerColor = (Color)ColorConverter.ConvertFromString(hexColor);
+        }
+
         public Color getInnerTextColor()
         {
             return innerTextColor;
         }
+
+        public void setInnerTextColor(string hexColor)
+        {
+            innerTextColor = (Color)ColorConverter.ConvertFromString(hexColor);
+        }
+
 
         public bool getSettings() //Reads CorkBoard.ini and populates the globals with accurate values.
         //returns true if initializers were read okay, false if any issue arose.
@@ -177,58 +243,10 @@ namespace CorkBoard.Core
         {
             return "#FF" + r.ToString("X2") + g.ToString("X2") + b.ToString("X2");
         }
-        /*public void checkData()
+
+        public void writeSettings()
         {
-            if (!getSettings())
-            {
-                Console.ReadLine(); //Show errors in reading before exit.
-                return; //any issue with INI read will auto-exit the program.
-            }
-
-            Console.WriteLine("====================");
-            //CREATE NET OBJECT WITH WXURL AND IMGURL IN CONSTRUCTORS
-
-            //var weatherdata = net.getwx();
-            //var imgdata = net.getimg();
-            DateTime lastRecordedTime = DateTime.Now;
-
-            //CREATE DISPLAY OBJECT WITH PROFILE, WX, IMG, TIME
-
-            int clktimer = 0;
-            int wxtimer = 0;
-            int imgtimer = 0;
-            string lastWrittenTime = lastRecordedTime.ToString("hh:mm tt");
-
-            while (true)
-            {
-                clktimer = ++clktimer % clkrefresh;
-                if (clktimer == 0)
-                {
-                    if (lastWrittenTime.CompareTo(DateTime.Now.ToString("hh:mm tt")) != 0)
-                    {
-                        lastRecordedTime = DateTime.Now;
-                        lastWrittenTime = lastRecordedTime.ToString("hh:mm tt");
-                        mainWindow.updateTime(lastWrittenTime);
-                        Console.WriteLine("Update clock to " + lastWrittenTime);
-                    }
-                }
-
-                wxtimer = ++wxtimer % wxrefresh;
-                if (wxtimer == 0)
-                {
-                    Console.WriteLine("Update weather.");
-                }
-
-                imgtimer = ++imgtimer % imgrefresh;
-                if (imgtimer == 0)
-                {
-                    Console.WriteLine("Update image.");
-                }
-
-                System.Threading.Thread.Sleep(1000);
-
-            }
-
-        }*/
+            // TODO: write settings to ini.
+        }
     }
 }
