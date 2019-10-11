@@ -17,6 +17,9 @@
             <StackPanel x:Name="MainView" Width="1190" Height="600" Background="#212121" Margin="0,137,168,0">
                 <Image x:Name="ImageBox" Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
             </StackPanel>
+            <StackPanel x:Name="ForecastView" Width="168" Margin="1190,0,0,0">
+                <!-- Programmatically filled with forecast info -->
+            </StackPanel>
         </Grid>
 
     </Grid>

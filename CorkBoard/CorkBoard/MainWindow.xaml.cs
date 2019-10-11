@@ -54,11 +54,14 @@ namespace CorkBoard
             Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
             updateTemp(weatherInfo.temp);
 
-            //ImageBox.Source = new BitmapImage(new Uri("../../surprise.PNG", UriKind.Relative));
             ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
             TimeBlock.Text = DateTime.Now.ToString("h:mm tt");
             DayBlock.Text = DateTime.Now.DayOfWeek.ToString();
             DateBlock.Text = DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture);
+
+            Forecast forecast = new Forecast();
+            List<Forecast.ForecastData> data = forecast.getForecast("https://api.weather.gov/gridpoints/IND/40,70/forecast?units=us");
+            updateForecast(data);
             Show();
 
             timer = new System.Windows.Forms.Timer();
@@ -104,7 +107,10 @@ namespace CorkBoard
             {
                 Weather weather = new Weather();
                 Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
+                Forecast forecast = new Forecast();
+                List<Forecast.ForecastData> data = forecast.getForecast("https://api.weather.gov/gridpoints/IND/40,70/forecast?units=us");
                 updateTemp(weatherInfo.temp);
+                updateForecast(data);
                 Console.WriteLine("Update weather.");
             }
 
@@ -141,6 +147,34 @@ namespace CorkBoard
                 TempBlock.Text = temp.ToString() + "\u00B0F";
             }
             
+        }
+
+        public void updateForecast(List<Forecast.ForecastData> data)
+        {
+            ForecastView.Children.Clear();
+           
+            int numShown = 0;
+            for (int i = 0; i < data.Count; i++)
+            {
+                Forecast.ForecastData fdata = data[i];
+                if (numShown == 3)
+                {
+                    break;
+                }
+
+                if (!fdata.period.ToLower().Contains("night")) 
+                {
+                    TextBlock forecastBlock = new TextBlock();
+                    forecastBlock.TextWrapping = TextWrapping.Wrap;
+                    forecastBlock.FontSize = 28;
+                    forecastBlock.Foreground = new SolidColorBrush(settings.getInnerTextColor());
+                    forecastBlock.Text = fdata.period + "\n" + fdata.temperature + "\u00B0 | " +
+                        data[i + 1].temperature + "\u00B0\n" + fdata.cloud + "\n";
+                    ForecastView.Children.Add(forecastBlock);
+                    numShown++;
+                }
+            }
+            Console.WriteLine("data count: " + data.Count);
         }
     }
 }

@@ -7,7 +7,7 @@ using CorkBoard.Core;
 
 namespace CorkBoard.Network
 {
-    class Forecast
+    public class Forecast
     {
         public struct ForecastData
         {
