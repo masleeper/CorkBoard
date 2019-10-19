@@ -37,6 +37,12 @@ namespace CorkBoard.Core
             outerTextColor = new Color();
             innerColor = new Color();
             innerTextColor = new Color();
+
+            outerColor = (Color)ColorConverter.ConvertFromString(colorString(0, 0, 0));
+            outerTextColor = (Color)ColorConverter.ConvertFromString(colorString(40, 40, 40));
+            innerColor = (Color)ColorConverter.ConvertFromString(colorString(80, 80, 80));
+            innerTextColor = (Color)ColorConverter.ConvertFromString(colorString(120, 120, 120));
+
             parseResults = getSettings("CorkBoard.ini");
         }
 
@@ -46,6 +52,12 @@ namespace CorkBoard.Core
             outerTextColor = new Color();
             innerColor = new Color();
             innerTextColor = new Color();
+
+            outerColor = (Color)ColorConverter.ConvertFromString(colorString(0, 0, 0));
+            outerTextColor = (Color)ColorConverter.ConvertFromString(colorString(40, 40, 40));
+            innerColor = (Color)ColorConverter.ConvertFromString(colorString(80, 80, 80));
+            innerTextColor = (Color)ColorConverter.ConvertFromString(colorString(120, 120, 120));
+
             parseResults = getSettings(filename);
         }
 
@@ -86,7 +98,21 @@ namespace CorkBoard.Core
             Console.WriteLine(Assembly.GetEntryAssembly().Location);
 
             //todo trycatch this
-            string[] inilines = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "/" + filename);
+
+            string[] inilines;
+
+            try
+            {
+                inilines = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "/" + filename);
+            } catch(Exception e)
+            {
+                if (e is FileNotFoundException)
+                {
+                    Console.WriteLine("CorkBoard.ini is missing!");
+                } else Console.WriteLine("Unable to read .ini file: " + e.Message);
+
+                return false;
+            }
 
             foreach (string iniline in inilines)
             {
