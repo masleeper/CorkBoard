@@ -17,10 +17,13 @@ namespace CorkBoard.Core
         private string imgurl; //Full URL for image to display.
         private int wxrefresh = 300; //Time in seconds to refresh weather - Lower for quicker refresh. BEWARE RATE LIMITING.
         private int imgrefresh = 120; //Time in seconds to refresh image - Lower means quicker refresh.
-        private int clkrefresh = 5; //Time in seconds to check clock - Lower means higher accuracy but potentially more problems. Not sure this should be a user-defined global, but adding it in for now.
+        private int clkrefresh = 2; //Time in seconds to check clock - Lower means higher accuracy but potentially more problems. Not sure this should be a user-defined global, but adding it in for now.
+        private int newrefresh = 10; //Time in seconds to refresh news.
         private int[] btheme = new int[12]; //Contains a basic color scheme, four RGB values. Background1, Text1, Background2, Color2.
         private Color outerColor, outerTextColor, innerColor, innerTextColor;
-        private bool timeVisible, dateVisible, weatherVisible, imageVisible;
+        private bool timeVisible, dateVisible, weatherVisible, imageVisible, newsVisible;
+        private int newsCount = 10; //Number of news titles to show.
+        private string newsSource = "bbc-news";
      
         public Settings()
         {
@@ -33,11 +36,22 @@ namespace CorkBoard.Core
             dateVisible = true;
             weatherVisible = true;
             imageVisible = true;
+            newsVisible = true;
         }
 
         public bool isTimeVisible()
         {
             return timeVisible;
+        }
+
+        public bool isNewsVisible()
+        {
+            return newsVisible;
+        }
+
+        public void setNewsVisible(bool newsVisible)
+        {
+            this.newsVisible = newsVisible;
         }
 
         public void setTimeVisible(bool timeVisible)
@@ -113,6 +127,36 @@ namespace CorkBoard.Core
         public int getImgRefresh()
         {
             return imgrefresh;
+        }
+
+        public void setNewsRefresh(int rate)
+        {
+            newrefresh = rate;
+        }
+
+        public int getNewsRefresh()
+        {
+            return newrefresh;
+        }
+
+        public void setNewsCount(int cnt)
+        {
+            newsCount = cnt;
+        }
+
+        public int getNewsCount()
+        {
+            return newsCount;
+        }
+
+        public string getNewsSource()
+        {
+            return newsSource;
+        }
+
+        public void setNewsSource(string source)
+        {
+            newsSource = source;
         }
 
         public void setClockRefresh(int rate)
