@@ -117,7 +117,7 @@ namespace CorkBoard
                 Console.WriteLine("Update image.");
             }
 
-            annctimer = ++anctimer % settings.getAncRefresh();
+            annctimer = ++annctimer % settings.getAncRefresh();
             if (annctimer == 0)
             {
                 //Whatever you need to do for
