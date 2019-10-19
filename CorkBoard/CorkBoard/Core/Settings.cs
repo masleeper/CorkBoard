@@ -136,23 +136,43 @@ namespace CorkBoard.Core
                             break;
 
                         case "imgrefresh": //Todo: Input Validation
-                            imgrefresh = int.Parse(iniargs[1]);
+                            if (!int.TryParse(iniargs[1], out imgrefresh))
+                            {
+                                Console.WriteLine("Image Refresh Parse Issue.");
+                                return false;
+                            }
                             break;
 
                         case "wxrefresh": //Todo: Input Validation
-                            wxrefresh = int.Parse(iniargs[1]);
+                            if (!int.TryParse(iniargs[1], out wxrefresh))
+                            {
+                                Console.WriteLine("Weather Refresh Parse Issue.");
+                                return false;
+                            }
                             break;
 
                         case "clkrefresh": //Todo: Input Validation
-                            clkrefresh = int.Parse(iniargs[1]);
+                            if (!int.TryParse(iniargs[1], out clkrefresh))
+                            {
+                                Console.WriteLine("Clock Refresh Parse Issue.");
+                                return false;
+                            }
                             break;
 
                         case "ancrefresh": //Todo: Input Validation
-                            ancrefresh = int.Parse(iniargs[1]);
+                            if (!int.TryParse(iniargs[1], out ancrefresh))
+                            {
+                                Console.WriteLine("Announcement Refresh Parse Issue.");
+                                return false;
+                            }
                             break;
 
                         case "nwsrefresh": //Todo: Input Validation
-                            nwsrefresh = int.Parse(iniargs[1]);
+                            if (!int.TryParse(iniargs[1], out nwsrefresh))
+                            {
+                                Console.WriteLine("News Refresh Parse Issue.");
+                                return false;
+                            }
                             break;
 
                         case "btheme": //Input validation should be complete
@@ -162,7 +182,11 @@ namespace CorkBoard.Core
                                 {
                                     for (int i = 0; i < 12; i++)
                                     {
-                                        btheme[i] = int.Parse(iniargs[i + 1]);
+                                        if (!int.TryParse(iniargs[i + 1], out btheme[i]))
+                                        {
+                                            Console.WriteLine("Color scheme parse error!");
+                                            return false;
+                                        }
                                         if (btheme[i] < 0 || btheme[i] > 255) //Outside RGB range
                                         {
                                             Console.WriteLine("Color out of bounds!");
@@ -194,7 +218,7 @@ namespace CorkBoard.Core
                 }
                 else
                 {
-                    Console.WriteLine("Commented out or Ignored: " + iniline);
+                    //Console.WriteLine("Commented out or Ignored: " + iniline);
                 }
             }
             Console.WriteLine("End reading .INI values.");
