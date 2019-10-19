@@ -8,6 +8,7 @@
         Title="Image Debug Window" 
         Height="768"
         Width="1366">
+ 
     <Grid>
         <Grid Name="OuterView" Background="#000000">
             <TextBlock x:Name="TimeBlock" Foreground="White" Width="500" Height="174" FontSize="100" Margin="27,0,831,594">10:34 PM</TextBlock>
@@ -23,6 +24,12 @@
             <Button x:Name="SettingsButton" Height="50" Width="168" FontSize="20" Content="Settings" Click="openSettingsView" Margin="1192,688,0,0"/>
         </Grid>
 
+
+      </StackPanel>
     </Grid>
+    <DataGrid HorizontalAlignment="Left" Height="100" Margin="1504,390,-244,0" VerticalAlignment="Top" Width="100"/>
+    <StackPanel HorizontalAlignment="Left" Height="100" Margin="1474,390,-214,0" VerticalAlignment="Top" Width="100"/>
+
+  </Grid>
 </Window>
 
