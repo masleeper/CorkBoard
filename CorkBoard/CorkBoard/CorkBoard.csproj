@@ -72,6 +72,7 @@
     <Compile Include="Network\Forecast.cs" />
     <Compile Include="Network\GetAnnouncements.cs" />
     <Compile Include="Network\Net.cs" />
+    <Compile Include="Network\News.cs" />
     <Compile Include="Network\Weather.cs" />
     <Compile Include="PostController.xaml.cs">
       <DependentUpon>PostController.xaml</DependentUpon>

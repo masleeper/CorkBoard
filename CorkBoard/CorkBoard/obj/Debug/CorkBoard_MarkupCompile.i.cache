@@ -4,17 +4,17 @@
 exe
 C#
 .cs
-C:\Users\nibarder\Desktop\CorkBoard-master\CorkBoard\CorkBoard\obj\Debug\
+C:\Users\nibarder\CorkBoard\CorkBoard\CorkBoard\obj\Debug\
 CorkBoard
 none
 false
 DEBUG;TRACE
-C:\Users\nibarder\Desktop\CorkBoard-master\CorkBoard\CorkBoard\App.xaml
+C:\Users\nibarder\CorkBoard\CorkBoard\CorkBoard\App.xaml
 3898883527
 
-17770562371
-18-865721702
+18935197770
+18-174572271
 MainWindow.xaml;PostController.xaml;SettingsWindow.xaml;
 
-False
+True
 
