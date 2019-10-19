@@ -20,8 +20,12 @@ namespace CorkBoard.Core
         private int clkrefresh = 5; //Time in seconds to check clock - Lower means higher accuracy but potentially more problems. Not sure this should be a user-defined global, but adding it in for now.
         private int[] btheme = new int[12]; //Contains a basic color scheme, four RGB values. Background1, Text1, Background2, Color2.
         private Color outerColor, outerTextColor, innerColor, innerTextColor;
-        private bool timeVisible, dateVisible, weatherVisible, imageVisible;
-     
+        private bool timeVisible, dateVisible, weatherVisible, imageVisible, newsVisible;
+        private int newrefresh = 10; //Time in seconds to refresh news.
+        private int newsCount = 10; //Number of news titles to show.
+        private string newsSource = "bbc-news";
+
+
         public Settings()
         {
             outerColor = new Color();
@@ -33,6 +37,7 @@ namespace CorkBoard.Core
             dateVisible = true;
             weatherVisible = true;
             imageVisible = true;
+            newsVisible = true;
         }
 
         public bool isTimeVisible()
@@ -114,6 +119,47 @@ namespace CorkBoard.Core
         {
             return imgrefresh;
         }
+
+        public bool isNewsVisible()
+        {
+            return newsVisible;
+        }
+
+        public void setNewsVisible(bool newsVisible)
+        {
+            this.newsVisible = newsVisible;
+        }
+
+        public void setNewsRefresh(int rate)
+        {
+            newrefresh = rate;
+        }
+
+        public int getNewsRefresh()
+        {
+            return newrefresh;
+        }
+
+        public void setNewsCount(int cnt)
+        {
+            newsCount = cnt;
+        }
+
+        public int getNewsCount()
+        {
+            return newsCount;
+        }
+
+        public string getNewsSource()
+        {
+            return newsSource;
+        }
+
+        public void setNewsSource(string source)
+        {
+            newsSource = source;
+        }
+
 
         public void setClockRefresh(int rate)
         {
