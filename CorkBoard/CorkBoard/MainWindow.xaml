@@ -8,16 +8,16 @@
         Title="Image Debug Window" 
         Height="768"
         Width="1366">
- 
+
     <Grid>
         <Grid Name="OuterView" Background="#000000">
             <TextBlock x:Name="TimeBlock" Foreground="White" Width="500" Height="174" FontSize="100" Margin="27,0,831,594">10:34 PM</TextBlock>
             <TextBlock x:Name="DayBlock" Foreground="White" Width="316" FontSize="50" Margin="566,0,476,657">Wednesday</TextBlock>
             <TextBlock x:Name="DateBlock" Foreground="White" Height="70" Width="316" FontSize="30" Margin="566,73,476,594">September 19, 2019</TextBlock>
             <TextBlock x:Name="TempBlock" Foreground="White" Height="120" Width="189" FontSize="80" Margin="958,7,211,610" >80</TextBlock>
-            <StackPanel x:Name="MainView" Width="1190" Height="600" Background="#212121" Margin="0,137,168,0">
-                <Image x:Name="ImageBox" Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
-            </StackPanel>
+            <Image x:Name="ImageBox" Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,174,0,0"/>
+            <WrapPanel x:Name="MainView" Background="#212121" Margin="1,329,586,0.4"/>
+            <StackPanel x:Name="NewsView" Background="#212121" Margin="779,329,212,10.4"/>
             <StackPanel x:Name="ForecastView" Width="168" Margin="1190,0,0,0">
                 <!-- Programmatically filled with forecast info -->
             </StackPanel>
@@ -28,8 +28,8 @@
 
 
     </Grid>
-    
 
-  
+
+
 </Window>
 

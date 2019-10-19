@@ -52,9 +52,8 @@ namespace CorkBoard
             updateTemp(weatherInfo.temp);
 
             //trying to create text boxes for posts 
-            List<Announcement> announcements = new GetAnnouncements().getAnnouncements("https://kassarl.github.io/corkboardjson/announcements.json");
-            TextBlock[] textBoxes = new TextBlock[announcements.Count];
-
+            List<Announcement> announcements = new GetAnnouncements().getAnnouncements("https://pastebin.com/raw/e7Kk4FUk");
+            
             for(int i = 0; i < announcements.Count; i++) 
             {
                 PostController post = new PostController();
@@ -97,6 +96,7 @@ namespace CorkBoard
             clktimer = ++clktimer % settings.getClockRefresh();
             if (clktimer == 0)
             {
+                updateAnnouncements();
                 string currentTime = DateTime.Now.ToString("h:mm tt");
                 if (lastWrittenTime.CompareTo(currentTime) != 0)
                 {
@@ -184,6 +184,37 @@ namespace CorkBoard
                     numShown++;
                 }
             }
+        }
+
+        public void updateAnnouncements()
+        {
+            List<PostController> toRemove = new List<PostController>();
+            foreach (UIElement obj in MainView.Children) {
+                if(obj is PostController)
+                {
+                    toRemove.Add((PostController)obj);
+                }
+            }
+
+            for(int i = 0; i < toRemove.Count; i++)
+            {
+                if(toRemove[i] != null)
+                {
+                    MainView.Children.Remove(toRemove[i]);
+                }
+            }
+
+            //trying to create text boxes for posts 
+            List<Announcement> announcements = new GetAnnouncements().getAnnouncements("https://pastebin.com/raw/e7Kk4FUk");
+
+            for (int i = 0; i < announcements.Count; i++)
+            {
+                PostController post = new PostController();
+                post.setBody(announcements[i].getBody());
+                post.setTitle(announcements[i].getTitle());
+                MainView.Children.Add(post);
+            }
+
         }
 
         public void openSettingsView(object sender, RoutedEventArgs e)
