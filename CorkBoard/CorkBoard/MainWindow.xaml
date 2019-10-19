@@ -17,6 +17,9 @@
             <TextBlock x:Name="TempBlock" Foreground="White" Height="120" Width="189" FontSize="80" Margin="958,7,211,610" >80</TextBlock>
             <StackPanel x:Name="MainView" Width="1190" Height="600" Background="#212121" Margin="0,137,168,0">
                 <Image x:Name="ImageBox" Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
+                <StackPanel x:Name="NewsBlock" Height="300" Width="500" Background="#212121" Margin="500,-150,211,610">
+                    <TextBlock x:Name="NewsTitle" Foreground="White" Height="100" Width="300" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Top">News</TextBlock>
+                </StackPanel>
             </StackPanel>
             <StackPanel x:Name="ForecastView" Width="168" Margin="1190,0,0,0">
                 <!-- Programmatically filled with forecast info -->
