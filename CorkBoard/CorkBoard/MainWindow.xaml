@@ -8,7 +8,6 @@
         Title="Image Debug Window" 
         Height="768"
         Width="1366">
-    <Grid Background="#FF212121">
         <Grid Background="#000000">
             <TextBlock x:Name="TimeBlock" Foreground="White" Width="500" Height="174" FontSize="100" Margin="27,0,831,594">10:34 PM</TextBlock>
             <TextBlock x:Name="DayBlock" Foreground="White" Width="316" FontSize="50" Margin="566,0,476,657">Wednesday</TextBlock>
