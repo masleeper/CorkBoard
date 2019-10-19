@@ -40,6 +40,15 @@ namespace CorkBoard.Core
             parseResults = getSettings("CorkBoard.ini");
         }
 
+        public Settings(string filename)
+        {
+            outerColor = new Color();
+            outerTextColor = new Color();
+            innerColor = new Color();
+            innerTextColor = new Color();
+            parseResults = getSettings(filename);
+        }
+
         public string getWeatherZone() { return wxzone; }
 
         public string getForecastZone() { return fczone; }
