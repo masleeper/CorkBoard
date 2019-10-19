@@ -31,6 +31,7 @@ namespace CorkBoard
         private int clktimer;
         private int wxtimer;
         private int imgtimer;
+        private int newtimer;
         private string lastWrittenTime;
         private Settings settings;
 
@@ -44,6 +45,7 @@ namespace CorkBoard
             clktimer = 0;
             wxtimer = 0;
             imgtimer = 0;
+            newtimer = 0;
             lastWrittenTime = DateTime.Now.ToString("hh:mm tt");
 
 
@@ -127,7 +129,26 @@ namespace CorkBoard
             if (imgtimer == 0)
             {
                 ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
-                Console.WriteLine("Update image.");
+        
+            }
+
+            newtimer = ++newtimer % settings.getNewsRefresh();
+            if (newtimer == 0)
+            {
+                News news = new News();
+                string[] list = new string[5];
+                int count = settings.getNewsCount();
+
+                if (count == null || count <= 0)
+                {
+                }
+                else
+                {
+                    string url = "https://newsapi.org/v2/top-headlines?sources=" + settings.getNewsSource() + "&apiKey=5969a901e08f42c7a532e0d93a039ffa";
+                    list = news.getNews(count, url);
+                    updateNews(count, list);
+                    Console.WriteLine("Update News.");
+                }
             }
 
         }
@@ -158,7 +179,37 @@ namespace CorkBoard
             
         }
 
- 
+        public void updateNews(int count, string[] list)
+        {
+            NewsBlock.Children.Clear();
+            TextBlock NewsTitle = new TextBlock();
+            NewsTitle.Text = "News";
+            NewsTitle.FontSize = 60;
+            NewsTitle.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            NewsTitle.VerticalAlignment = 0;
+            NewsTitle.Foreground = Brushes.White;
+            NewsBlock.Children.Add(NewsTitle);
+            string NewsString = "";
+            for (int a = 0; a < count; a++)
+            {
+                Console.WriteLine(list[a]);
+                NewsString = NewsString + list[a];
+                NewsString = NewsString + "\n\n\n";
+            }
+
+            NewsString = NewsString.Replace("â€\u2122", "'");
+            NewsString = NewsString.Replace("â€˜", "'");
+
+            TextBlock NewsText = new TextBlock();
+            NewsText.Text = NewsString;
+            NewsText.FontSize = 10;
+            NewsText.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            NewsText.Foreground = Brushes.White;
+            NewsText.TextWrapping = TextWrapping.Wrap;
+            NewsBlock.Children.Add(NewsText);
+
+        }
+
         public void updateForecast(List<Forecast.ForecastData> data)
         {
             ForecastView.Children.Clear();
@@ -254,7 +305,23 @@ namespace CorkBoard
                 DateBlock.Visibility = Visibility.Collapsed;
                 DayBlock.Visibility = Visibility.Collapsed;
             }
- 
+
+            if (settings.isNewsVisible())
+            {
+                News news = new News();
+                int count = settings.getNewsCount();
+                if (count == null | count <= 0)
+                {
+                }
+                else
+                {
+                    string[] list = new string[count];
+                    string url = "https://newsapi.org/v2/top-headlines?sources=" + settings.getNewsSource() + "&apiKey=5969a901e08f42c7a532e0d93a039ffa";
+                    list = news.getNews(count, url);
+                    updateNews(count, list);
+                }
+            }
+
         }
     }
 }
