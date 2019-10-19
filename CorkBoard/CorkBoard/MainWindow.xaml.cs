@@ -46,31 +46,7 @@ namespace CorkBoard
             imgtimer = 0;
             lastWrittenTime = DateTime.Now.ToString("hh:mm tt");
 
-
-            Weather weather = new Weather();
-            Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
-            updateTemp(weatherInfo.temp);
-
-            //trying to create text boxes for posts 
-            List<Announcement> announcements = new GetAnnouncements().getAnnouncements("https://kassarl.github.io/corkboardjson/announcements.json");
-            TextBlock[] textBoxes = new TextBlock[announcements.Count];
-
-            for(int i = 0; i < announcements.Count; i++) 
-            {
-                PostController post = new PostController();
-                post.setBody(announcements[i].getBody());
-                post.setTitle(announcements[i].getTitle());
-                MainView.Children.Add(post); 
-            }
-
-            //ImageBox.Source = new BitmapImage(new Uri("../../surprise.PNG", UriKind.Relative));
-            ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
-            TimeBlock.Text = DateTime.Now.ToString("h:mm tt");
-            DayBlock.Text = DateTime.Now.DayOfWeek.ToString();
-            DateBlock.Text = DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture);
-
             updateUI();
- 
             Show();
 
             timer = new System.Windows.Forms.Timer();
@@ -158,7 +134,6 @@ namespace CorkBoard
             
         }
 
- 
         public void updateForecast(List<Forecast.ForecastData> data)
         {
             ForecastView.Children.Clear();
@@ -254,7 +229,6 @@ namespace CorkBoard
                 DateBlock.Visibility = Visibility.Collapsed;
                 DayBlock.Visibility = Visibility.Collapsed;
             }
- 
         }
     }
 }
