@@ -29,6 +29,7 @@ namespace CorkBoard
     {
         private System.Windows.Forms.Timer timer;
         private int clktimer;
+        private int annctimer;
         private int wxtimer;
         private int imgtimer;
         private string lastWrittenTime;
@@ -44,12 +45,13 @@ namespace CorkBoard
             clktimer = 0;
             wxtimer = 0;
             imgtimer = 0;
+            annctimer = 0;
             lastWrittenTime = DateTime.Now.ToString("hh:mm tt");
             OuterView.Background = new SolidColorBrush(settings.getOuterColor());
             MainView.Background = new SolidColorBrush(settings.getInnerColor());
             setOuterTextColor(settings.getOuterTextColor());
             setInnerTextColor(settings.getInnerTextColor());
-
+            
             Weather weather = new Weather();
             Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
             updateTemp(weatherInfo.temp);
@@ -113,6 +115,15 @@ namespace CorkBoard
             {
                 ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
                 Console.WriteLine("Update image.");
+            }
+
+            annctimer = ++anctimer % settings.getAncRefresh();
+            if (annctimer == 0)
+            {
+                //Whatever you need to do for
+                //GEt the text from 
+                settings.getAnnouncementsUrl();
+                ///Write it to the window.
             }
 
         }

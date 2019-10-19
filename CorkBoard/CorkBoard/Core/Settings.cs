@@ -13,99 +13,72 @@ namespace CorkBoard.Core
 {
     class Settings
     {
-        private string wxurl; //Full URL for weather API in our zone. In the future, maybe replace with zip code and structure an appropriate API link on our own?
-        private string imgurl; //Full URL for image to display.
+        private string wxzone = "KLAF";
+        private string fczone = "IND";
+        private string alerts = "IN";
+        private string imgurl = "https://static.thenounproject.com/png/340719-200.png"; //Full URL for image to display.
+        private string ancurl = "https://pastebin.com/raw/bnvDD1we"; //Full URL for announcement text source.
+        private string nwsurl = "https://www.npr.org/feeds/1001/feed.json"; //Full URL for news JSON source.
         private int wxrefresh = 300; //Time in seconds to refresh weather - Lower for quicker refresh. BEWARE RATE LIMITING.
         private int imgrefresh = 120; //Time in seconds to refresh image - Lower means quicker refresh.
+        private int ancrefresh = 120; //Time in seconds to refresh announcement text.
+        private int nwsrefresh = 120; //Time in seconds to refresh news headlines.
+
         private int clkrefresh = 5; //Time in seconds to check clock - Lower means higher accuracy but potentially more problems. Not sure this should be a user-defined global, but adding it in for now.
         private int[] btheme = new int[12]; //Contains a basic color scheme, four RGB values. Background1, Text1, Background2, Color2.
+
         private Color outerColor, outerTextColor, innerColor, innerTextColor;
-     
+
+        public bool parseResults;
+
         public Settings()
         {
             outerColor = new Color();
             outerTextColor = new Color();
             innerColor = new Color();
             innerTextColor = new Color();
-            getSettings();
+            parseResults = getSettings("CorkBoard.ini");
         }
 
-        public void setWeatherUrl(string url)
-        {
-            wxurl = url;
-        }
+        public string getWeatherZone() { return wxzone; }
 
-        public string getWeatherUrl()
-        {
-            return wxurl;
-        }
+        public string getForecastZone() { return fczone; }
 
-        public void setImgUrl(string url)
-        {
-            imgurl = url;
-        }
+        public string getAlertZone() { return alerts; }
 
-        public string getImgUrl()
-        {
-            return imgurl;
-        }
+        public string getImgUrl() { return imgurl; }
 
-        public void setWeatherRefresh(int rate)
-        {
-            wxrefresh = rate;
-        }
+        public string getNewsUrl() { return nwsurl; }
 
-        public int getWeatherRefresh()
-        {
-            return wxrefresh;
-        }
+        public string getAnnouncementsUrl() { return ancurl; }
 
-        public void setImgRefresh(int rate)
-        {
-            imgrefresh = rate;
-        }
+        public int getWeatherRefresh() { return wxrefresh; }
 
-        public int getImgRefresh()
-        {
-            return imgrefresh;
-        }
+        public int getImgRefresh() { return imgrefresh; }
 
-        public void setClockRefresh(int rate)
-        {
-            clkrefresh = rate;
-        }
+        public int getAncRefresh() { return ancrefresh; }
 
-        public int getClockRefresh()
-        {
-            return clkrefresh;
-        }
+        public int getNewsRefresh() { return nwsrefresh; }
 
-        public Color getOuterColor()
-        {
-            return outerColor;
-        }
+        public int getClockRefresh() { return clkrefresh; }
 
-        public Color getOuterTextColor()
-        {
-            return outerTextColor;
-        }
+        public Color getOuterColor() { return outerColor; }
 
-        public Color getInnerColor()
-        {
-            return innerColor;
-        }
+        public Color getOuterTextColor() { return outerTextColor; }
 
-        public Color getInnerTextColor()
-        {
-            return innerTextColor;
-        }
+        public Color getInnerColor() { return innerColor; }
 
-        public bool getSettings() //Reads CorkBoard.ini and populates the globals with accurate values.
+        public Color getInnerTextColor() { return innerTextColor; }
+
+        public bool getSettings(string filename) //Reads CorkBoard.ini and populates the globals with accurate values.
         //returns true if initializers were read okay, false if any issue arose.
         {
             Console.WriteLine("Begin reading .INI values.");
             Console.WriteLine(Assembly.GetEntryAssembly().Location);
-            string[] inilines = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "/CorkBoard.ini");
+
+            //todo trycatch this
+            string[] inilines = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "/" + filename);
+
             foreach (string iniline in inilines)
             {
                 if (iniline.Length > 0 && iniline[0] != '#' && iniline.Contains(" ")) //Filter out badly formatted settings
@@ -115,20 +88,64 @@ namespace CorkBoard.Core
                     switch (iniargs[0])
                     {
                         case "imgurl": //Todo: Input Validation
-                            imgurl = iniargs[1]; //URL, single string.
+                            if (!Uri.IsWellFormedUriString(iniargs[1], UriKind.Absolute))
+                            {
+                                Console.WriteLine("Your image URL is invalid!");
+                                return false;
+                            }
+                            imgurl = iniargs[1]; //URL, single string.                            
                             break;
-                        case "wxurl": //Todo: Input Validation
-                            wxurl = iniargs[1]; //URL, single string.
+
+                        case "ancurl":
+                            if (!Uri.IsWellFormedUriString(iniargs[1], UriKind.Absolute))
+                            {
+                                Console.WriteLine("Your announcement URL is invalid!");
+                                return false;
+                            }
+                            ancurl = iniargs[1]; //URL, single string.
                             break;
+
+                        case "nwsurl":
+                            if (!Uri.IsWellFormedUriString(iniargs[1], UriKind.Absolute))
+                            {
+                                Console.WriteLine("Your news URL is invalid!");
+                                return false;
+                            }
+                            nwsurl = iniargs[1]; //URL, single string.
+                            break;
+
+                        case "wxzone":
+                            wxzone = iniargs[1]; //Small alphanumeric code, single string.
+                            break;
+
+                        case "fczone":
+                            fczone = iniargs[1]; //Small alphanumeric code, single string.
+                            break;
+
+                        case "alerts":
+                            alerts = iniargs[1]; //Small alphanumeric code, single string.
+                            break;
+
                         case "imgrefresh": //Todo: Input Validation
                             imgrefresh = int.Parse(iniargs[1]);
                             break;
+
                         case "wxrefresh": //Todo: Input Validation
                             wxrefresh = int.Parse(iniargs[1]);
                             break;
+
                         case "clkrefresh": //Todo: Input Validation
                             clkrefresh = int.Parse(iniargs[1]);
                             break;
+
+                        case "ancrefresh": //Todo: Input Validation
+                            ancrefresh = int.Parse(iniargs[1]);
+                            break;
+
+                        case "nwsrefresh": //Todo: Input Validation
+                            nwsrefresh = int.Parse(iniargs[1]);
+                            break;
+
                         case "btheme": //Input validation should be complete
                             if (iniargs.Length == 13)
                             {
@@ -144,7 +161,7 @@ namespace CorkBoard.Core
                                         }
                                     }
 
-                                    outerColor = (Color) ColorConverter.ConvertFromString(colorString(btheme[0], btheme[1], btheme[2]));
+                                    outerColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[0], btheme[1], btheme[2]));
                                     outerTextColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[3], btheme[4], btheme[5]));
                                     innerColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[6], btheme[7], btheme[8]));
                                     innerTextColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[9], btheme[10], btheme[11]));
@@ -154,7 +171,8 @@ namespace CorkBoard.Core
                                     Console.WriteLine("Can't parse theme!");
                                     return false;
                                 }
-                            } else //Not enough or too many values for a theme
+                            }
+                            else //Not enough or too many values for a theme
                             {
                                 Console.WriteLine("Bad theme!");
                                 return false;
@@ -164,7 +182,8 @@ namespace CorkBoard.Core
                             Console.WriteLine("(No match - Ignored)");
                             break;
                     }
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Commented out or Ignored: " + iniline);
                 }

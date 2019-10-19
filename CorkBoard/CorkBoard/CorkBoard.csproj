@@ -64,6 +64,7 @@
     </ApplicationDefinition>
     <Compile Include="Core\HelperFunctions.cs" />
     <Compile Include="Core\Settings.cs" />
+    <Compile Include="Forecast.cs" />
     <Compile Include="Network\Announcement.cs" />
     <Compile Include="Network\Net.cs" />
     <Compile Include="Network\Weather.cs" />

@@ -42,3 +42,17 @@ C:\Users\Me\Documents\cs408\project\CorkBoard\CorkBoard\CorkBoard\obj\Debug\Cork
 \\nas01.itap.purdue.edu\puhome\cs.data\desktop\CorkBoard-ui\CorkBoard\CorkBoard\obj\Debug\CorkBoard.g.resources
 \\nas01.itap.purdue.edu\puhome\cs.data\desktop\CorkBoard-ui\CorkBoard\CorkBoard\obj\Debug\CorkBoard.Properties.Resources.resources
 \\nas01.itap.purdue.edu\puhome\cs.data\desktop\CorkBoard-ui\CorkBoard\CorkBoard\obj\Debug\CorkBoard.csproj.GenerateResource.Cache
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\CorkBoard.csprojAssemblyReference.cache
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\MainWindow.g.cs
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\App.g.cs
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\CorkBoard_MarkupCompile.cache
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\CorkBoard_MarkupCompile.lref
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\bin\Debug\CorkBoard.exe.config
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\bin\Debug\CorkBoard.exe
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\bin\Debug\CorkBoard.pdb
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\MainWindow.baml
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\CorkBoard.g.resources
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\CorkBoard.Properties.Resources.resources
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\CorkBoard.csproj.GenerateResource.cache
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\CorkBoard.exe
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\CorkBoard.pdb
