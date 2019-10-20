@@ -271,7 +271,7 @@ namespace CorkBoard.Core
                                 Console.WriteLine("Clock Refresh value is too big!");
                                 break;
                             }
-
+                            
                             clkrefresh = clkoutval;
 
                             break;
