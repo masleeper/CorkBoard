@@ -139,7 +139,7 @@ namespace CorkBoard
                 string[] list = new string[5];
                 int count = settings.getNewsCount();
 
-                if (count == null || count <= 0)
+                if (count <= 0)
                 {
                 }
                 else
@@ -310,7 +310,7 @@ namespace CorkBoard
             {
                 News news = new News();
                 int count = settings.getNewsCount();
-                if (count == null | count <= 0)
+                if (count <= 0)
                 {
                 }
                 else

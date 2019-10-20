@@ -14,7 +14,6 @@ namespace CorkBoard.Network
         {
 
             WebClient wc = new WebClient();
-            HttpRequestHeader requestHeader;
             wc.Headers.Add("user-agent", "CorkBoard");
             try
             {
@@ -50,7 +49,6 @@ namespace CorkBoard.Network
         {
 
             WebClient wc = new WebClient();
-            HttpRequestHeader requestHeader;
             wc.Headers.Add("user-agent", "CorkBoard");
             string fileType = url.Split('.')[url.Split('.').Length - 1];
             try
