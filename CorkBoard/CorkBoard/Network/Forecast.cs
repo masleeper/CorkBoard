@@ -23,10 +23,12 @@ namespace CorkBoard.Network
 
         }
 
-        public List<ForecastData> getForecast(string URL)
+        public List<ForecastData> getForecast(string zone)
         {
             List<ForecastData> data = new List<ForecastData>();
-            if(URL == null || URL == "")
+
+            string URL = "https://api.weather.gov/gridpoints/" + zone + "/40,70/forecast?units=us";
+            if (zone == null || zone == "")
             {
                 return data;
             }

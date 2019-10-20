@@ -14,7 +14,6 @@ namespace CorkBoard.Network
         {
 
             WebClient wc = new WebClient();
-            HttpRequestHeader requestHeader;
             wc.Headers.Add("user-agent", "CorkBoard");
             try
             {

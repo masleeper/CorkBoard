@@ -20,15 +20,18 @@ namespace CorkBoard.Network
             public string msg;
         }
 
-        public WeatherInfo getWeather(string apiCall)
+        public WeatherInfo getWeather(string zone)
         {
+            
+            string apiCall = "https://api.weather.gov/stations/" + zone + "/observations?limit=1";
+            Console.WriteLine(apiCall);
             WeatherInfo info;
             info.temp = -12345; //value for checking errors
             info.humidity = -12345; //value for checking error
             info.windDirection = -12345;
             info.windSpeed = -12345;
             info.msg = "-12345";
-            if (apiCall == null || apiCall == "")
+            if (zone == null || zone == "")
             {
                 return info;
             }

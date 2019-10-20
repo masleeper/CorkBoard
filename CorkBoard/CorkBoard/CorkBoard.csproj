@@ -68,6 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Core\HelperFunctions.cs" />
     <Compile Include="Core\Settings.cs" />
+    <Compile Include="Network\Alerts.cs" />
     <Compile Include="Network\Announcement.cs" />
     <Compile Include="Network\Forecast.cs" />
     <Compile Include="Network\GetAnnouncements.cs" />

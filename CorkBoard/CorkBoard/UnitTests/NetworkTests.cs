@@ -40,6 +40,18 @@ namespace CorkBoard.UnitTests
 
         }
 
+        public void runAlertTests()
+        {
+            Console.WriteLine("----- Starting Alert Tests -----");
+            Test.PrintTest("Valid Alert API: ", testValidAlert());
+            Test.PrintTest("Invalid Alert API: ", testInvalidAlert());
+            Test.PrintTest("Empty Alert API: ", testEmptyAlertAPI());
+            Test.PrintTest("Empty Alert API: ", testEmptyAlertCounty());
+
+            Console.WriteLine("------- Alert Tests End -------\n\n");
+
+        }
+
         //test web section
         #region
         private bool testValidCall()
@@ -77,7 +89,7 @@ namespace CorkBoard.UnitTests
             public bool testValidWeather()
         {
             Weather w = new Weather();
-            Weather.WeatherInfo info = w.getWeather("https://api.weather.gov/stations/KSBN/observations?limit=1");
+            Weather.WeatherInfo info = w.getWeather("KSBN");
             //if one value is null all is null
             //only need to check 1 value to exist
             if(info.temp != -12345)
@@ -90,7 +102,7 @@ namespace CorkBoard.UnitTests
         public bool testInvalidWeather()
         {
             Weather w = new Weather();
-            Weather.WeatherInfo info = w.getWeather("https://api.weather.gov/stations/QSBN/observations?limit=1");
+            Weather.WeatherInfo info = w.getWeather("QSBN");
             //if one value is null all is null
             //only need to check 1 value to exist
             if (info.temp == -12345)
@@ -122,7 +134,7 @@ namespace CorkBoard.UnitTests
         public bool testValidForecast()
         {
             Forecast f = new Forecast();
-            List<Forecast.ForecastData> data = f.getForecast("https://api.weather.gov/gridpoints/IND/40,70/forecast?units=us");
+            List<Forecast.ForecastData> data = f.getForecast("IND");
             //if one value is null all is null
             //only need to check 1 value to exist
             if (data.Count > 1)
@@ -135,7 +147,7 @@ namespace CorkBoard.UnitTests
         public bool testInvalidForecast()
         {
             Forecast f = new Forecast();
-            List<Forecast.ForecastData> data = f.getForecast("https://api.weather.gov/gridpoints/INZ/40,70/forecast?units=us");
+            List<Forecast.ForecastData> data = f.getForecast("INZ");
             //if one value is null all is null
             //only need to check 1 value to exist
             if (data.Count == 0)
@@ -160,6 +172,63 @@ namespace CorkBoard.UnitTests
         }
         #endregion
 
+
+        //test get alerts
+        #region
+        public bool testValidAlert()
+        {
+            Alerts a = new Alerts();
+            List<Alerts.AlertData> data = a.getAlerts("IN", "Tippecanoe");
+            //if one value is null all is null
+            //only need to check 1 value to exist
+            if (data[0].severity != "ERROR")
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public bool testInvalidAlert()
+        {
+            Alerts a = new Alerts();
+            List<Alerts.AlertData> data = a.getAlerts("QB", "Tippecanoe");
+            //if one value is null all is null
+            //only need to check 1 value to exist
+            if (data[0].severity == "ERROR")
+            {
+                return true;
+            }
+
+            return false;
+        }
+        public bool testEmptyAlertAPI()
+        {
+            Alerts a = new Alerts();
+            List<Alerts.AlertData> data = a.getAlerts("", "Tippecanoe");
+            //if one value is null all is null
+            //only need to check 1 value to exist
+            if (data[0].severity == "NO API CALL")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool testEmptyAlertCounty()
+        {
+            Alerts a = new Alerts();
+            List<Alerts.AlertData> data = a.getAlerts("IN", "");
+            //if one value is null all is null
+            //only need to check 1 value to exist
+            if (data[0].severity == "ERROR")
+            {
+                return true;
+            }
+
+            return false;
+        }
+        #endregion
 
     }
 }

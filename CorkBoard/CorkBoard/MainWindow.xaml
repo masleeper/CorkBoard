@@ -8,31 +8,32 @@
         Title="Image Debug Window" 
         Height="768"
         Width="1366">
- 
+
     <Grid>
         <Grid Name="OuterView" Background="#000000">
             <TextBlock x:Name="TimeBlock" Foreground="White" Width="500" Height="174" FontSize="100" Margin="27,0,831,594">10:34 PM</TextBlock>
             <TextBlock x:Name="DayBlock" Foreground="White" Width="316" FontSize="50" Margin="566,0,476,657">Wednesday</TextBlock>
             <TextBlock x:Name="DateBlock" Foreground="White" Height="70" Width="316" FontSize="30" Margin="566,73,476,594">September 19, 2019</TextBlock>
             <TextBlock x:Name="TempBlock" Foreground="White" Height="120" Width="189" FontSize="80" Margin="958,7,211,610" >80</TextBlock>
-            <StackPanel x:Name="MainView" Width="1190" Height="600" Background="#212121" Margin="0,137,168,0">
-                <Image x:Name="ImageBox" Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>
-                <StackPanel x:Name="NewsBlock" Height="300" Width="500" Background="#212121" Margin="500,-150,211,610">
-                    <TextBlock x:Name="NewsTitle" Foreground="White" Height="100" Width="300" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Top">News</TextBlock>
-                </StackPanel>
+            <Image x:Name="ImageBox" Height="150" Width="150" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,174,0,0"></Image>
+            <TextBlock x:Name="Alerts" HorizontalAlignment="Left" Margin="176,179,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="128" Width="1009"/>
+            <WrapPanel x:Name="MainView" Background="#212121" Margin="0,332,683,0"/>
+            <StackPanel x:Name="NewsBlock" Background="#212121" Margin="680,332,195,-1">
+                <TextBlock x:Name="NewsTitle" Foreground="White" Height="100" Width="300" FontSize="60" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="News"/></TextBlock>
             </StackPanel>
-            <StackPanel x:Name="ForecastView" Width="168" Margin="1190,0,0,0">
+            <StackPanel x:Name="ForecastView" Width="168" Margin="1190,0,0,54">
                 <!-- Programmatically filled with forecast info -->
             </StackPanel>
             <Button x:Name="SettingsButton" Height="50" Width="168" FontSize="20" Content="Settings" Click="openSettingsView" Margin="1192,688,0,0"/>
+            
         </Grid>
         <DataGrid HorizontalAlignment="Left" Height="100" Margin="1504,390,-244,0" VerticalAlignment="Top" Width="100"/>
         <StackPanel HorizontalAlignment="Left" Height="100" Margin="1474,390,-214,0" VerticalAlignment="Top" Width="100"/>
 
 
     </Grid>
-    
 
-  
+
+
 </Window>
 
