@@ -24,6 +24,7 @@ namespace CorkBoard.Network
         {
             
             string apiCall = "https://api.weather.gov/stations/" + zone + "/observations?limit=1";
+            Console.WriteLine(apiCall);
             WeatherInfo info;
             info.temp = -12345; //value for checking errors
             info.humidity = -12345; //value for checking error

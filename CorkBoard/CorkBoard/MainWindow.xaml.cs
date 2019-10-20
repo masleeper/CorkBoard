@@ -56,11 +56,11 @@ namespace CorkBoard
 
 
             Weather weather = new Weather();
-            Weather.WeatherInfo weatherInfo = weather.getWeather("KLAF");
+            Weather.WeatherInfo weatherInfo = weather.getWeather(settings.getWeatherZone());
             updateTemp(weatherInfo.temp);
 
             //trying to create text boxes for posts 
-            List<Announcement> announcements = new GetAnnouncements().getAnnouncements("https://kassarl.github.io/corkboardjson/announcements.json");
+            List<Announcement> announcements = new GetAnnouncements().getAnnouncements(settings.getAnnouncementsUrl());
             TextBlock[] textBoxes = new TextBlock[announcements.Count];
 
             for(int i = 0; i < announcements.Count; i++) 
@@ -123,9 +123,9 @@ namespace CorkBoard
             if (wxtimer == 0)
             {
                 Weather weather = new Weather();
-                Weather.WeatherInfo weatherInfo = weather.getWeather("KLAF");
+                Weather.WeatherInfo weatherInfo = weather.getWeather(settings.getWeatherZone());
                 Forecast forecast = new Forecast();
-                List<Forecast.ForecastData> data = forecast.getForecast("IND");
+                List<Forecast.ForecastData> data = forecast.getForecast(settings.getForecastZone());
 
                 updateTemp(weatherInfo.temp);
                 updateForecast(data);
@@ -199,7 +199,7 @@ namespace CorkBoard
             string NewsString = "";
             for (int a = 0; a < count; a++)
             {
-                Console.WriteLine(list[a]);
+                //Console.WriteLine(list[a]);
                 NewsString = NewsString + list[a];
                 NewsString = NewsString + "\n\n\n";
             }
@@ -215,6 +215,36 @@ namespace CorkBoard
             NewsText.TextWrapping = TextWrapping.Wrap;
             NewsBlock.Children.Add(NewsText);
 
+        }
+
+        private void updateAlerts()
+        {
+            //List<Alerts.AlertData> data = new Alerts().getAlerts(settings.getAlertState(), settings.getAlertCounty());
+            List<Alerts.AlertData> data = new Alerts().getAlerts("CA", "Santa");
+            String alerts = "";
+            Console.WriteLine("Alerts: " + data.Count);
+            int disp = 0;
+            for(int i = 0; i < data.Count; i++)
+            {
+                if(disp > 4)
+                {
+                    break;
+                }
+                if (data[i].severity.Equals("NONE"))
+                {
+                    break;
+                }
+                if (data[i].severity.Equals("Severe"))
+                {
+                    disp++;
+                    String nextAlert = data[i].severity + ": " + data[i].msg + "\n\n";
+                    alerts += nextAlert;
+                }
+
+            }
+            Console.WriteLine(alerts);
+            this.Alerts.Foreground = new SolidColorBrush(settings.getOuterTextColor());
+            this.Alerts.Text = alerts;
         }
 
         public void updateForecast(List<Forecast.ForecastData> data)
@@ -235,7 +265,7 @@ namespace CorkBoard
                     TextBlock forecastBlock = new TextBlock();
                     forecastBlock.TextWrapping = TextWrapping.Wrap;
                     forecastBlock.FontSize = 28;
-                    forecastBlock.Foreground = new SolidColorBrush(settings.getInnerTextColor());
+                    forecastBlock.Foreground = new SolidColorBrush(settings.getOuterTextColor());
                     forecastBlock.Text = fdata.period + "\n" + fdata.temperature + "\u00B0 | " +
                         data[i + 1].temperature + "\u00B0\n" + fdata.cloud.Split(new char[] { 'A', 'N', 'D' })[0] + "\n";
                     ForecastView.Children.Add(forecastBlock);
@@ -265,17 +295,18 @@ namespace CorkBoard
             MainView.Background = new SolidColorBrush(settings.getInnerColor());
             setOuterTextColor(settings.getOuterTextColor());
             setInnerTextColor(settings.getInnerTextColor());
+            updateAlerts();
 
             if (settings.isWeatherVisible())
             {
                 TempBlock.Visibility = Visibility.Visible;
                 ForecastView.Visibility = Visibility.Visible;
                 Weather weather = new Weather();
-                Weather.WeatherInfo weatherInfo = weather.getWeather("KLAF");
+                Weather.WeatherInfo weatherInfo = weather.getWeather(settings.getWeatherZone());
                 updateTemp(weatherInfo.temp);
 
                 Forecast forecast = new Forecast();
-                List<Forecast.ForecastData> data = forecast.getForecast("IND");
+                List<Forecast.ForecastData> data = forecast.getForecast(settings.getForecastZone());
                 updateForecast(data);
             } else
             {

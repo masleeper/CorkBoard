@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CorkBoard"
-             mc:Ignorable="d" Height="146.822" Width="341.383">
+             mc:Ignorable="d" Height="146.822" Width="334.671">
     <Grid x:Name="Grid" Background="#FFE4EE0F"  Margin="10,10,10.4,0.6">
         <Rectangle HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="326" Margin="0,0,-0.4,0" Fill="#FFF0D111"/>
         <Label x:Name="Title" Content="Label" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top"/>
