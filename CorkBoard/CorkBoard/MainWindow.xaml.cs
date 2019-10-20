@@ -39,6 +39,12 @@ namespace CorkBoard
         {
             
             InitializeComponent();
+
+            this.Loaded += new RoutedEventHandler((object sender, RoutedEventArgs e) =>
+            {
+                this.WindowState = WindowState.Maximized;
+            });
+
             settings = new Settings();
             Test.runTests();
 
@@ -50,7 +56,7 @@ namespace CorkBoard
 
 
             Weather weather = new Weather();
-            Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
+            Weather.WeatherInfo weatherInfo = weather.getWeather("KLAF");
             updateTemp(weatherInfo.temp);
 
             //trying to create text boxes for posts 
@@ -117,9 +123,10 @@ namespace CorkBoard
             if (wxtimer == 0)
             {
                 Weather weather = new Weather();
-                Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
+                Weather.WeatherInfo weatherInfo = weather.getWeather("KLAF");
                 Forecast forecast = new Forecast();
-                List<Forecast.ForecastData> data = forecast.getForecast("https://api.weather.gov/gridpoints/IND/40,70/forecast?units=us");
+                List<Forecast.ForecastData> data = forecast.getForecast("IND");
+
                 updateTemp(weatherInfo.temp);
                 updateForecast(data);
                 Console.WriteLine("Update weather.");
@@ -230,7 +237,7 @@ namespace CorkBoard
                     forecastBlock.FontSize = 28;
                     forecastBlock.Foreground = new SolidColorBrush(settings.getInnerTextColor());
                     forecastBlock.Text = fdata.period + "\n" + fdata.temperature + "\u00B0 | " +
-                        data[i + 1].temperature + "\u00B0\n" + fdata.cloud + "\n";
+                        data[i + 1].temperature + "\u00B0\n" + fdata.cloud.Split(new char[] { 'A', 'N', 'D' })[0] + "\n";
                     ForecastView.Children.Add(forecastBlock);
                     numShown++;
                 }
@@ -264,11 +271,11 @@ namespace CorkBoard
                 TempBlock.Visibility = Visibility.Visible;
                 ForecastView.Visibility = Visibility.Visible;
                 Weather weather = new Weather();
-                Weather.WeatherInfo weatherInfo = weather.getWeather("https://api.weather.gov/stations/KLAF/observations?limit=1");
+                Weather.WeatherInfo weatherInfo = weather.getWeather("KLAF");
                 updateTemp(weatherInfo.temp);
 
                 Forecast forecast = new Forecast();
-                List<Forecast.ForecastData> data = forecast.getForecast("https://api.weather.gov/gridpoints/IND/40,70/forecast?units=us");
+                List<Forecast.ForecastData> data = forecast.getForecast("IND");
                 updateForecast(data);
             } else
             {
