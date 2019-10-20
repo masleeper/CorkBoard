@@ -18,7 +18,7 @@ namespace CorkBoard.Core
         private string alerts = "IN";
         private string imgurl = "https://static.thenounproject.com/png/340719-200.png"; //Full URL for image to display.
         private string ancurl = "https://pastebin.com/raw/bnvDD1we"; //Full URL for announcement text source.
-        private string nwsurl = "https://www.npr.org/feeds/1001/feed.json"; //Full URL for news JSON source.
+        private string nwssrc = "bbc-news"; //Full URL for news JSON source.
         private int wxrefresh = 300; //Time in seconds to refresh weather - Lower for quicker refresh. BEWARE RATE LIMITING.
         private int imgrefresh = 120; //Time in seconds to refresh image - Lower means quicker refresh.
         private int ancrefresh = 120; //Time in seconds to refresh announcement text.
@@ -69,7 +69,9 @@ namespace CorkBoard.Core
 
         public string getImgUrl() { return imgurl; }
 
-        public string getNewsUrl() { return nwsurl; }
+        public string getNewsSource() { return nwssrc; }
+
+        public void setNewsSource(string src) { nwssrc = src; }
 
         public string getAnnouncementsUrl() { return ancurl; }
 
@@ -95,13 +97,13 @@ namespace CorkBoard.Core
         //returns true if initializers were read okay, false if any issue arose.
         {
             Console.WriteLine("Begin reading .INI values.");
-            Console.WriteLine(Assembly.GetEntryAssembly().Location);
+            //Console.WriteLine(Assembly.GetEntryAssembly().Location);
 
             //todo trycatch this
 
             string[] inilines;
 
-            try
+            try //Attempt to read ini file into string array
             {
                 inilines = File.ReadAllLines(AppDomain.CurrentDomain.BaseDirectory + "/" + filename);
             } catch(Exception e)
@@ -116,10 +118,10 @@ namespace CorkBoard.Core
 
             foreach (string iniline in inilines)
             {
-                if (iniline.Length > 0 && iniline[0] != '#' && iniline.Contains(" ")) //Filter out badly formatted settings
+                if (iniline.Length > 2 && iniline[0] != '#' && iniline.Contains(" ")) //Skip empty lines, comments, and lines without parameters
                 {
-                    Console.WriteLine("Parsing: " + iniline);
-                    string[] iniargs = iniline.Split(' ');
+                    //Console.WriteLine("Parsing: " + iniline);
+                    string[] iniargs = iniline.Split(' '); //Split option from parameter(s)
                     switch (iniargs[0])
                     {
                         case "imgurl": //Todo: Input Validation
@@ -140,13 +142,8 @@ namespace CorkBoard.Core
                             ancurl = iniargs[1]; //URL, single string.
                             break;
 
-                        case "nwsurl":
-                            if (!Uri.IsWellFormedUriString(iniargs[1], UriKind.Absolute))
-                            {
-                                Console.WriteLine("Your news URL is invalid!");
-                                return false;
-                            }
-                            nwsurl = iniargs[1]; //URL, single string.
+                        case "newssource":
+                            nwssrc = iniargs[1]; //URL, single string.
                             break;
 
                         case "wxzone":
@@ -162,41 +159,73 @@ namespace CorkBoard.Core
                             break;
 
                         case "imgrefresh": //Todo: Input Validation
-                            if (!int.TryParse(iniargs[1], out imgrefresh))
+                            if (!int.TryParse(iniargs[1], out int imgoutval))
                             {
                                 Console.WriteLine("Image Refresh Parse Issue.");
                                 return false;
                             }
+                            if (imgoutval < 15)
+                            {
+                                return false;
+                            }
+
+                            imgrefresh = imgoutval;
+
                             break;
 
                         case "wxrefresh": //Todo: Input Validation
-                            if (!int.TryParse(iniargs[1], out wxrefresh))
+                            if (!int.TryParse(iniargs[1], out int wxoutval))
                             {
                                 Console.WriteLine("Weather Refresh Parse Issue.");
                                 return false;
                             }
+                            if (wxoutval < 15)
+                            {
+                                return false;
+                            }
+
+                            wxrefresh = wxoutval;
+
                             break;
 
                         case "clkrefresh": //Todo: Input Validation
-                            if (!int.TryParse(iniargs[1], out clkrefresh))
+                            if (!int.TryParse(iniargs[1], out int clkoutval))
                             {
                                 Console.WriteLine("Clock Refresh Parse Issue.");
                                 return false;
                             }
+                            if (clkoutval < 15)
+                            {
+                                return false;
+                            }
+
+                            clkrefresh = clkoutval;
+
                             break;
 
                         case "ancrefresh": //Todo: Input Validation
-                            if (!int.TryParse(iniargs[1], out ancrefresh))
+                            if (!int.TryParse(iniargs[1], out int ancoutval))
                             {
                                 Console.WriteLine("Announcement Refresh Parse Issue.");
                                 return false;
                             }
+                            if (ancoutval < 15)
+                            {
+                                return false;
+                            }
+
+                            ancrefresh = ancoutval;
+
                             break;
 
                         case "nwsrefresh": //Todo: Input Validation
-                            if (!int.TryParse(iniargs[1], out nwsrefresh))
+                            if (!int.TryParse(iniargs[1], out int nwsoutval))
                             {
                                 Console.WriteLine("News Refresh Parse Issue.");
+                                return false;
+                            }
+                            if (nwsoutval  < 15)
+                            {
                                 return false;
                             }
                             break;
