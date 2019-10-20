@@ -219,8 +219,8 @@ namespace CorkBoard
 
         private void updateAlerts()
         {
-            //List<Alerts.AlertData> data = new Alerts().getAlerts(settings.getAlertState(), settings.getAlertCounty());
-            List<Alerts.AlertData> data = new Alerts().getAlerts("CA", "Santa");
+            List<Alerts.AlertData> data = new Alerts().getAlerts(settings.getAlertState(), settings.getAlertCounty());
+            //List<Alerts.AlertData> data = new Alerts().getAlerts("CA", "Santa");
             String alerts = "";
             Console.WriteLine("Alerts: " + data.Count);
             int disp = 0;
