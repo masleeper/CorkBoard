@@ -80,6 +80,7 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UnitTests\IniTests.cs" />
     <Compile Include="UnitTests\Test.cs" />
     <Compile Include="UnitTests\NetworkTests.cs" />
     <Page Include="MainWindow.xaml">

@@ -53,7 +53,7 @@ namespace CorkBoard.Core
 
             parseResults = getSettings("CorkBoard.ini");
 
-            if (!parseResults) Console.WriteLine("Error!!!");
+            if (!parseResults) Console.WriteLine("An error has occurred while parsing the .ini file. CorkBoard will run with default settings.");
         }
 
         public Settings(string filename)
@@ -69,6 +69,8 @@ namespace CorkBoard.Core
             innerTextColor = (Color)ColorConverter.ConvertFromString(colorString(120, 120, 120));
 
             parseResults = getSettings(filename);
+
+            if (!parseResults) Console.WriteLine("An error has occurred while parsing the .ini file. CorkBoard will run with default settings.");
         }
 
         public string getWeatherZone() { return wxzone; }
@@ -136,7 +138,7 @@ namespace CorkBoard.Core
         public bool getSettings(string filename) //Reads CorkBoard.ini and populates the globals with accurate values.
         //returns true if initializers were read okay, false if any issue arose.
         {
-            Console.WriteLine("Begin reading .INI values.");
+            //Console.WriteLine("Begin reading .INI values.");
             //Console.WriteLine(Assembly.GetEntryAssembly().Location);
 
             //todo trycatch this
@@ -151,9 +153,9 @@ namespace CorkBoard.Core
             {
                 if (e is FileNotFoundException)
                 {
-                    Console.WriteLine("CorkBoard.ini is missing!");
+                    Console.WriteLine("Error: CorkBoard.ini is missing!");
                 }
-                else Console.WriteLine("Unable to read .ini file: " + e.Message);
+                else Console.WriteLine("Error: Unable to read .ini file: " + e.Message);
 
                 return false;
             }
@@ -169,8 +171,8 @@ namespace CorkBoard.Core
                         case "imgurl": //Todo: Input Validation
                             if (!Uri.IsWellFormedUriString(iniargs[1], UriKind.Absolute))
                             {
-                                Console.WriteLine("Your image URL is invalid!");
-                                return false;
+                                Console.WriteLine("Error: Your image URL is invalid!");
+                                break;
                             }
                             imgurl = iniargs[1]; //URL, single string.                            
                             break;
@@ -178,8 +180,8 @@ namespace CorkBoard.Core
                         case "ancurl":
                             if (!Uri.IsWellFormedUriString(iniargs[1], UriKind.Absolute))
                             {
-                                Console.WriteLine("Your announcement URL is invalid!");
-                                return false;
+                                Console.WriteLine("Error: Your announcement URL is invalid!");
+                                break;
                             }
                             ancurl = iniargs[1]; //URL, single string.
                             break;
@@ -214,7 +216,6 @@ namespace CorkBoard.Core
                                     imageVisible = false;
                                     break;
                                 case "time":
-                                    Console.WriteLine("hiding time");
                                     timeVisible = false;
                                     break;
                                 case "date":
@@ -228,15 +229,15 @@ namespace CorkBoard.Core
                             }
                             break;
 
-                        case "imgrefresh": //Todo: Input Validation
+                        case "imgrefresh":
                             if (!int.TryParse(iniargs[1], out int imgoutval))
                             {
-                                Console.WriteLine("Image Refresh Parse Issue.");
+                                Console.WriteLine("Error: Image Refresh Parse Issue.");
                                 break;
                             }
                             if (imgoutval < 15)
                             {
-                                Console.WriteLine("Image Refresh Value is too small!");
+                                Console.WriteLine("Error: Image Refresh Value is too small!");
                                 break;
                             }
 
@@ -244,15 +245,15 @@ namespace CorkBoard.Core
 
                             break;
 
-                        case "wxrefresh": //Todo: Input Validation
+                        case "wxrefresh":
                             if (!int.TryParse(iniargs[1], out int wxoutval))
                             {
-                                Console.WriteLine("Weather Refresh Parse Issue.");
+                                Console.WriteLine("Error: Weather Refresh Parse Issue.");
                                 break;
                             }
                             if (wxoutval < 15)
                             {
-                                Console.WriteLine("Weather Refresh value is too small!");
+                                Console.WriteLine("Error: Weather Refresh value is too small!");
                                 break;
                             }
 
@@ -260,15 +261,15 @@ namespace CorkBoard.Core
 
                             break;
 
-                        case "clkrefresh": //Todo: Input Validation
+                        case "clkrefresh":
                             if (!int.TryParse(iniargs[1], out int clkoutval))
                             {
-                                Console.WriteLine("Clock Refresh Parse Issue.");
+                                Console.WriteLine("Error: Clock Refresh Parse Issue.");
                                 break;
                             }
-                            if (clkoutval > 60)
+                            if (clkoutval > 60 || clkoutval < 1)
                             {
-                                Console.WriteLine("Clock Refresh value is too big!");
+                                Console.WriteLine("Error: Clock Refresh value is out of bounds!");
                                 break;
                             }
                             
@@ -276,15 +277,15 @@ namespace CorkBoard.Core
 
                             break;
 
-                        case "ancrefresh": //Todo: Input Validation
+                        case "ancrefresh":
                             if (!int.TryParse(iniargs[1], out int ancoutval))
                             {
-                                Console.WriteLine("Announcement Refresh Parse Issue.");
+                                Console.WriteLine("Error: Announcement Refresh Parse Issue.");
                                 break;
                             }
                             if (ancoutval < 15)
                             {
-                                Console.WriteLine("Announcement Refresh value too small!");
+                                Console.WriteLine("Error: Announcement Refresh value too small!");
                                 break;
                             }
 
@@ -292,15 +293,15 @@ namespace CorkBoard.Core
 
                             break;
 
-                        case "nwsrefresh": //Todo: Input Validation
+                        case "nwsrefresh":
                             if (!int.TryParse(iniargs[1], out int nwsoutval))
                             {
-                                Console.WriteLine("News Refresh Parse Issue.");
+                                Console.WriteLine("Error: News Refresh Parse Issue.");
                                 break;
                             }
                             if (nwsoutval < 15)
                             {
-                                Console.WriteLine("News Refresh value too small!");
+                                Console.WriteLine("Error: News Refresh value too small!");
                                 break;
                             }
 
@@ -308,15 +309,15 @@ namespace CorkBoard.Core
 
                             break;
 
-                        case "nwsCount": //Todo: Input Validation
+                        case "nwscount":
                             if (!int.TryParse(iniargs[1], out int ncntoutval))
                             {
-                                Console.WriteLine("News Count Parse Issue.");
+                                Console.WriteLine("Error: News Count Parse Issue.");
                                 break;
                             }
-                            if (ncntoutval > 30)
+                            if (ncntoutval > 30 || ncntoutval < 1)
                             {
-                                Console.WriteLine("News Count value too big!");
+                                Console.WriteLine("Error: News Count value is out of bounds! (Must be between 1 and 30 inclusive)");
                                 break;
                             }
 
@@ -334,13 +335,13 @@ namespace CorkBoard.Core
                                     {
                                         if (!int.TryParse(iniargs[i + 1], out btheme[i]))
                                         {
-                                            Console.WriteLine("Color scheme parse error!");
+                                            Console.WriteLine("Error: Color scheme can't be parsed!");
                                             errors = true;
                                             break;
                                         }
                                         if (btheme[i] < 0 || btheme[i] > 255) //Outside RGB range
                                         {
-                                            Console.WriteLine("Color out of bounds!");
+                                            Console.WriteLine("Error: Color out of bounds!");
                                             errors = true;
                                             break;
                                         }
@@ -351,21 +352,22 @@ namespace CorkBoard.Core
                                     outerTextColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[3], btheme[4], btheme[5]));
                                     innerColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[6], btheme[7], btheme[8]));
                                     innerTextColor = (Color)ColorConverter.ConvertFromString(colorString(btheme[9], btheme[10], btheme[11]));
+
                                 }
                                 catch (FormatException) //If it's not a valid int
                                 {
-                                    Console.WriteLine("Can't parse theme!");
+                                    Console.WriteLine("Error: Can't parse theme!");
                                     break;
                                 }
                             }
                             else //Not enough or too many values for a theme
                             {
-                                Console.WriteLine("Bad theme!");
+                                Console.WriteLine("Error: Bad theme!");
                                 break;
                             }
                             break;
                         default:
-                            Console.WriteLine("(No match - Ignored)");
+                            //Console.WriteLine("(No match - Ignored)");
                             break;
                     }
                 }
@@ -374,7 +376,7 @@ namespace CorkBoard.Core
                     //Console.WriteLine("Commented out or Ignored: " + iniline);
                 }
             }
-            Console.WriteLine("End reading .INI values.");
+            //Console.WriteLine("End reading .INI values.");
             return true;
         }
 
