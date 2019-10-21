@@ -91,7 +91,7 @@ namespace CorkBoard.UnitTests
         public bool testURLCorrectness()
         {
             Settings settings = new Settings("testURLs.ini");
-            if (!settings.getImgUrl().Equals("https://static.thenounproject.com/png/340719-200.png")) return false;
+            if (!settings.getImgUrl().Equals("https://findlogovector.com/wp-content/uploads/2018/10/purdue-university-logo-vector.png")) return false;
             if (!settings.getAnnouncementsUrl().Equals("http://www.pastebin.com/text.txt")) return false;
             return true;
         }
