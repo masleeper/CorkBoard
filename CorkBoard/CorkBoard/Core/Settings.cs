@@ -17,7 +17,7 @@ namespace CorkBoard.Core
         private string fczone = "IND";
         private string alertstate = "IN";
         private string alertcounty = "Tippecanoe";
-        private string imgurl = "https://findlogovector.com/wp-content/uploads/2018/10/purdue-university-logo-vector.png"; //Full URL for image to display.
+        private string imgurl = "https://www.logolynx.com/images/logolynx/93/93557b69a559fe77bf1df92cb5bed880.jpeg"; //Full URL for image to display.
         private string ancurl = "https://pastebin.com/raw/jGbcxxkv"; //Full URL for announcement text source.
         private string nwssrc = "bbc-news"; //Full URL for news JSON source.
         private int wxrefresh = 300; //Time in seconds to refresh weather - Lower for quicker refresh. BEWARE RATE LIMITING.

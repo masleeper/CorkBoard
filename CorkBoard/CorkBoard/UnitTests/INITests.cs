@@ -49,7 +49,7 @@ namespace CorkBoard.UnitTests
         {
             Settings settings = new Settings("nofile.NOFILE");
             if (settings.parseResults == true) return false;
-            if (!settings.getImgUrl().Equals("https://static.thenounproject.com/png/340719-200.png")) return false;
+            if (!settings.getImgUrl().Equals("https://www.logolynx.com/images/logolynx/93/93557b69a559fe77bf1df92cb5bed880.jpeg")) return false;
             if (!settings.getAnnouncementsUrl().Equals("https://pastebin.com/raw/jGbcxxkv")) return false;
             if (!settings.getNewsSource().Equals("bbc-news")) return false;
             if (!settings.getWeatherZone().Equals("KLAF")) return false;
@@ -91,7 +91,7 @@ namespace CorkBoard.UnitTests
         public bool testURLCorrectness()
         {
             Settings settings = new Settings("testURLs.ini");
-            if (!settings.getImgUrl().Equals("https://findlogovector.com/wp-content/uploads/2018/10/purdue-university-logo-vector.png")) return false;
+            if (!settings.getImgUrl().Equals("https://www.logolynx.com/images/logolynx/93/93557b69a559fe77bf1df92cb5bed880.jpeg")) return false;
             if (!settings.getAnnouncementsUrl().Equals("http://www.pastebin.com/text.txt")) return false;
             return true;
         }
