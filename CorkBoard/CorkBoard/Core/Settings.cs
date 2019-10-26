@@ -174,14 +174,14 @@ namespace CorkBoard.Core
                                 Console.WriteLine("Error: Your image URL is invalid!");
                                 break;
                             }
-                            imgurl = iniargs[1]; //URL, single string.                            
+                            //imgurl = iniargs[1]; //URL, single string.                            
                             break;
 
                         case "ancurl":
                             if (!Uri.IsWellFormedUriString(iniargs[1], UriKind.Absolute))
                             {
                                 Console.WriteLine("Error: Your announcement URL is invalid!");
-                             //   break;
+                                //break;
                             }
                             ancurl = iniargs[1]; //URL, single string.
                             break;
@@ -210,7 +210,7 @@ namespace CorkBoard.Core
                             switch (iniargs[1])
                             {
                                 case "weather":
-                                    weatherVisible = false;
+                                    imageVisible = false;
                                     break;
                                 case "image":
                                     imageVisible = false;

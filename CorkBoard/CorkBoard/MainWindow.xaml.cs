@@ -46,7 +46,7 @@ namespace CorkBoard
             });
 
             settings = new Settings();
-            Test.runTests();
+            //Test.runTests();
 
             clktimer = 0;
             wxtimer = 0;
