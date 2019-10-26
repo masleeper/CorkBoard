@@ -110,6 +110,7 @@ namespace CorkBoard
                 {
                     lastWrittenTime = currentTime;
                     Console.WriteLine("Update clock to " + lastWrittenTime);
+                    updateAnnouncements();
                 }
                 string currentDate = DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture);
                 if (DateBlock.Text.CompareTo(currentDate) != 0)
@@ -162,7 +163,7 @@ namespace CorkBoard
         public void updateTime(string time)
         {
             TimeBlock.Text = time;
-            updateAnnouncements();
+            
 
         }
 
