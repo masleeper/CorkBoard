@@ -181,6 +181,10 @@ namespace CorkBoard.UnitTests
             List<Alerts.AlertData> data = a.getAlerts("IN", "Tippecanoe");
             //if one value is null all is null
             //only need to check 1 value to exist
+            if(data.Count == 0)
+            {
+                return false;
+            }
             if (data[0].severity != "ERROR")
             {
                 return true;
@@ -194,6 +198,10 @@ namespace CorkBoard.UnitTests
             List<Alerts.AlertData> data = a.getAlerts("QB", "Tippecanoe");
             //if one value is null all is null
             //only need to check 1 value to exist
+            if (data.Count == 0)
+            {
+                return false;
+            }
             if (data[0].severity == "ERROR")
             {
                 return true;
@@ -207,6 +215,10 @@ namespace CorkBoard.UnitTests
             List<Alerts.AlertData> data = a.getAlerts("", "Tippecanoe");
             //if one value is null all is null
             //only need to check 1 value to exist
+            if (data.Count == 0)
+            {
+                return false;
+            }
             if (data[0].severity == "NO API CALL")
             {
                 return true;
@@ -221,6 +233,10 @@ namespace CorkBoard.UnitTests
             List<Alerts.AlertData> data = a.getAlerts("IN", "");
             //if one value is null all is null
             //only need to check 1 value to exist
+            if (data.Count == 0)
+            {
+                return false;
+            }
             if (data[0].severity == "ERROR")
             {
                 return true;

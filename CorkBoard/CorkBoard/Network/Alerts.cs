@@ -30,7 +30,7 @@ namespace CorkBoard.Network
                 err.severity = "ERROR";
                 err.msg = "Empty county value";
                 data.Add(err);
-                return data;
+                //return data;
             }
             if (state == null || state == "")
             {
@@ -38,7 +38,7 @@ namespace CorkBoard.Network
                 err.severity = "NO API CALL";
                 err.msg = "Empty state value";
                 data.Add(err);
-                return data;
+                //return data;
             }
             string webText = "";
             dynamic wJson = null;
@@ -50,7 +50,7 @@ namespace CorkBoard.Network
             catch (Exception e)
             {
                 AlertData err;
-                err.severity = "ERROR";
+                err.severity = "Severe";
                 err.msg = "Invalid API Call";
                 data.Add(err);
             }
@@ -96,8 +96,8 @@ namespace CorkBoard.Network
             if(data.Count == 0)
             {
                 AlertData noAlert;
-                noAlert.msg = "No ALerts";
-                noAlert.severity = "NONE";
+                noAlert.msg = "YOU SHOULD NOT SEE THIS";
+                noAlert.severity = "Severe";
                 data.Add(noAlert);
             }
             return data;

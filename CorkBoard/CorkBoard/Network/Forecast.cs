@@ -51,7 +51,7 @@ namespace CorkBoard.Network
                         {
                             break;
                         }
-                        data1.temperature = wJson["properties"]["periods"][i]["temperature"] != null ? (int)wJson["properties"]["periods"][i]["temperature"] : -12345;
+                        data1.temperature = wJson["properties"]["periods"][i]["temperature"] == null ? (int)wJson["properties"]["periods"][i]["temperature"] : -12345;
                         data1.windSpeed = wJson["properties"]["periods"][i]["windSpeed"] != null ? (string)wJson["properties"]["periods"][i]["windSpeed"] : "0 mph";
                         data1.windDirection = wJson["properties"]["periods"][i]["windDirection"] != null? (string)wJson["properties"]["periods"][i]["windDirection"] : "NO WIND";
                         data1.cloud = wJson["properties"]["periods"][i]["shortForecast"] != null ? (string)wJson["properties"]["periods"][i]["shortForecast"] : "NULL";
