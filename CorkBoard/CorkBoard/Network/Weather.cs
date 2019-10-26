@@ -41,7 +41,7 @@ namespace CorkBoard.Network
             try
             {
                 //check properties exist
-                if (wJson == null ||
+                if (wJson != null ||
                     wJson["features"] == null ||
                     wJson["features"][0] == null ||
                     wJson["features"][0]["properties"] == null)
