@@ -7,8 +7,8 @@
              mc:Ignorable="d" Height="146.822" Width="334.671">
     <Grid x:Name="Grid" Background="#FFE4EE0F"  Margin="10,10,10.4,0.6">
         <Rectangle HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="326" Margin="0,0,-0.4,0" Fill="#FFF0D111"/>
-        <Label x:Name="Title" Content="Label" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Body"  HorizontalAlignment="Left" Margin="25,51,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Label x:Name="Title" Content="Label" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Width="26"/>
+        <TextBlock x:Name="Body"  HorizontalAlignment="Left" Margin="25,51,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="11" Width="112"/>
 
     </Grid>
 </UserControl>
