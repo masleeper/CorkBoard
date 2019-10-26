@@ -150,9 +150,9 @@ namespace CorkBoard
                 }
                 else
                 {
-                    string url = "https://newsapi.org/v2/top-headlines?sources=" + settings.getNewsSource() + "&apiKey=5969a901e08f42c7a532e0d93a039ffa";
-                    list = news.getNews(count, url);
-                    updateNews(count, list);
+                    string url = "https://newsapi.org/v2/top-headlines?sources=cnn&apiKey=5969a901e08f42c7a532e0d93a039ffa";
+                    list = news.getNews(2, url);
+                    updateNews(2, list);
                     Console.WriteLine("Update News.");
                 }
               //  updateAnnouncements();
@@ -193,8 +193,8 @@ namespace CorkBoard
             NewsBlock.Children.Clear();
             TextBlock NewsTitle = new TextBlock();
             NewsTitle.Text = "News";
-            NewsTitle.FontSize = 60;
-            NewsTitle.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            NewsTitle.FontSize = 10;
+            NewsTitle.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
             NewsTitle.VerticalAlignment = 0;
             NewsTitle.Foreground = Brushes.White;
             NewsBlock.Children.Add(NewsTitle);
@@ -206,13 +206,12 @@ namespace CorkBoard
                 NewsString = NewsString + "\n\n\n";
             }
 
-            NewsString = NewsString.Replace("â€\u2122", "'");
-            NewsString = NewsString.Replace("â€˜", "'");
+            NewsString = NewsString.Replace("e", "'");
 
             TextBlock NewsText = new TextBlock();
             NewsText.Text = NewsString;
             NewsText.FontSize = 10;
-            NewsText.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            NewsText.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
             NewsText.Foreground = Brushes.White;
             NewsText.TextWrapping = TextWrapping.Wrap;
             NewsBlock.Children.Add(NewsText);
@@ -393,9 +392,9 @@ namespace CorkBoard
                 else
                 {
                     string[] list = new string[count];
-                    string url = "https://newsapi.org/v2/top-headlines?sources=" + settings.getNewsSource() + "&apiKey=5969a901e08f42c7a532e0d93a039ffa";
-                    list = news.getNews(count, url);
-                    updateNews(count, list);
+                    string url = "https://newsapi.org/v2/top-headlines?sources=cnn&apiKey=5969a901e08f42c7a532e0d93a039ffa";
+                    list = news.getNews(2, url);
+                    updateNews(2, list);
                 }
             }
 
