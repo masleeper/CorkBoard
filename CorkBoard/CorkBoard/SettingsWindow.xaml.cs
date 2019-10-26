@@ -86,33 +86,7 @@ namespace CorkBoard
         public void saveSettings()
         {
             mainSettings.setTimeVisible((bool)showTime.IsChecked);
-            mainSettings.setDateVisible((bool)showDate.IsChecked);
-            mainSettings.setWeatherVisible((bool)showWeather.IsChecked);
-            mainSettings.setImageVisible((bool)showImage.IsChecked);
-            Regex colorRegex = new Regex("#[0-9A-Fa-f]{8}$");
-
-            Match m = colorRegex.Match(OuterBg.Text.Trim());
-            if (m.Success)
-            {
-                mainSettings.setOuterColor(OuterBg.Text.Trim());
-            }
-
-            m = colorRegex.Match(InnerBg.Text.Trim());
-            if (m.Success)
-            {
-                mainSettings.setInnerColor(InnerBg.Text.Trim());
-            }
-
-            m = colorRegex.Match(OuterText.Text.Trim());
-            if (m.Success) {
-                mainSettings.setOuterTextColor(OuterText.Text.Trim());
-            }
-
-            m = colorRegex.Match(InnerText.Text.Trim());
-            if (m.Success)
-            {
-                mainSettings.setInnerTextColor(InnerText.Text.Trim());
-            }
+            mainSettings.setWeatherVisible((bool)showTime.IsChecked);
         }
 
         public void settingsClose(object sender, System.ComponentModel.CancelEventArgs e)

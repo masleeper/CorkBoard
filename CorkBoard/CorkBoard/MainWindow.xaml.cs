@@ -109,7 +109,6 @@ namespace CorkBoard
                 if (lastWrittenTime.CompareTo(currentTime) != 0)
                 {
                     lastWrittenTime = currentTime;
-                    updateTime(lastWrittenTime);
                     Console.WriteLine("Update clock to " + lastWrittenTime);
                 }
                 string currentDate = DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture);
@@ -352,7 +351,12 @@ namespace CorkBoard
             if (settings.isImageVisible())
             {
                 ImageBox.Visibility = Visibility.Visible;
-                ImageBox.Source = new BitmapImage(new Uri(settings.getImgUrl()));
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.UriSource = new Uri(settings.getImgUrl());
+                image.Rotation = Rotation.Rotate180;
+                image.EndInit();
+                ImageBox.Source = image;
             } else
             {
                 ImageBox.Visibility = Visibility.Collapsed;
