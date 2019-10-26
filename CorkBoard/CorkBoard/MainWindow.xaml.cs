@@ -169,6 +169,7 @@ namespace CorkBoard
 
         public void updateDay(string day)
         {
+
             DayBlock.Text = day;
         }
 
@@ -375,7 +376,7 @@ namespace CorkBoard
             {
                 DayBlock.Visibility = Visibility.Visible;
                 DateBlock.Visibility = Visibility.Visible;
-                updateDay(DateTime.Now.DayOfWeek.ToString());
+                updateDay(DateTime.Now.AddDays(1).DayOfWeek.ToString());
                 updateDate(DateTime.Now.ToString("MMMM dd, yyyy", CultureInfo.InvariantCulture));
             } else
             {
