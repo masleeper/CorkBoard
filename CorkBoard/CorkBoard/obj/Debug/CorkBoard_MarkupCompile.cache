@@ -4,16 +4,16 @@
 exe
 C#
 .cs
-C:\Users\nibarder\CorkBoard\CorkBoard\CorkBoard\obj\Debug\
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\obj\Debug\
 CorkBoard
 none
 false
 DEBUG;TRACE
-C:\Users\nibarder\CorkBoard\CorkBoard\CorkBoard\App.xaml
+C:\Users\quinn\Source\Repos\masleeper\CorkBoard\CorkBoard\CorkBoard\App.xaml
 3898883527
 
-18-363530548
-18-174572271
+211102822568
+18-1800473753
 MainWindow.xaml;PostController.xaml;SettingsWindow.xaml;
 
 False

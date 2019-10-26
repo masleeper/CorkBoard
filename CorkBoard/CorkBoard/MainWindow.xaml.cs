@@ -156,6 +156,7 @@ namespace CorkBoard
                     updateNews(2, list);
                     Console.WriteLine("Update News.");
                 }
+                updateAnnouncements();
             }
 
         }
@@ -244,6 +245,38 @@ namespace CorkBoard
             Console.WriteLine(alerts);
             this.Alerts.Foreground = new SolidColorBrush(settings.getOuterTextColor());
             this.Alerts.Text = alerts;
+        }
+
+        public void updateAnnouncements()
+        {
+            List<PostController> toRemove = new List<PostController>();
+            foreach (UIElement obj in MainView.Children)
+            {
+                if (obj is PostController)
+                {
+                    toRemove.Add((PostController)obj);
+                }
+            }
+
+            for (int i = 0; i < toRemove.Count; i++)
+            {
+                if (toRemove[i] != null)
+                {
+                    MainView.Children.Remove(toRemove[i]);
+                }
+            }
+
+            //trying to create text boxes for posts 
+            List<Announcement> announcements = new GetAnnouncements().getAnnouncements(settings.getAnnouncementsUrl());
+
+            for (int i = 0; i < announcements.Count; i++)
+            {
+                PostController post = new PostController();
+                post.setBody(announcements[i].getBody());
+                post.setTitle(announcements[i].getTitle());
+                MainView.Children.Add(post);
+            }
+
         }
 
         public void updateForecast(List<Forecast.ForecastData> data)
