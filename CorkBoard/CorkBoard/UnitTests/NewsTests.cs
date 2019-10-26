@@ -25,6 +25,7 @@ namespace CorkBoard.UnitTests
             int count = 3;
             string[] list = new string[count];
             string url = "https://newsapi.org/v2/top-headlines?sources=" + "bbc-news" + "&apiKey=5969a901e08f42c7a532e0d93a039ffa";
+
             list = news.getNews(count, url);
             if(list == null)
             {
@@ -39,7 +40,16 @@ namespace CorkBoard.UnitTests
             int count = 3;
             string[] list = new string[count];
             string url = "google.com";
-            list = news.getNews(count, url);
+            try
+            {
+
+                list = news.getNews(count, url);
+
+
+            } catch
+            {
+                return false;
+            }
             if (list[0] != "")
             {
                 return false;

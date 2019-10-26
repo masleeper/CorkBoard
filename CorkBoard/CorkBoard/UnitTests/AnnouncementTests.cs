@@ -30,8 +30,16 @@ namespace CorkBoard.UnitTests
 
         public bool testInvalidAnnouncement()
         {
-            List<Announcement> test_list = new GetAnnouncements().getAnnouncements("https://kassarl.github.io/corkboardjson/invalid.json");
-            if(test_list.Count != 1)
+            List<Announcement> test_list = new List<Announcement>();
+            try
+            {
+                 test_list = new GetAnnouncements().getAnnouncements("https://kassarl.github.io/corkboardjson/invalid.json");
+
+            } catch
+            {
+                return false;
+            }
+            if (test_list.Count != 1)
             {
                 return false;
             }

@@ -26,6 +26,8 @@ namespace CorkBoard.UnitTests
             new NetworkTests().runForecastTests();
             new NetworkTests().runAlertTests();
             new IniTests().runIniTests();
+            new AnnouncementTests().runAnnouncementsTest();
+            new NewsTests().runNewsTests();
         }
     }
 }
