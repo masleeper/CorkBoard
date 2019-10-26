@@ -18,10 +18,17 @@ namespace CorkBoard.Network
             Console.WriteLine("Text plain is " + text);
 
             JavaScriptSerializer json_serializer = new JavaScriptSerializer();
+            List<Announcement> announcementList = new List<Announcement>();
 
-
-            List<Announcement> announcementList = JsonConvert.DeserializeObject<List<Announcement>>(text);
-
+            try
+            {
+                announcementList = JsonConvert.DeserializeObject<List<Announcement>>(text);
+            }
+            catch
+            {
+                //announcementList.Add(new Announcement("Error", "Please use valid announcement format"));
+                return announcementList;
+            }
             return announcementList;
         }
     }

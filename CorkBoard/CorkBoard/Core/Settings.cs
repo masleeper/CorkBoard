@@ -181,7 +181,7 @@ namespace CorkBoard.Core
                             if (!Uri.IsWellFormedUriString(iniargs[1], UriKind.Absolute))
                             {
                                 Console.WriteLine("Error: Your announcement URL is invalid!");
-                                break;
+                             //   break;
                             }
                             ancurl = iniargs[1]; //URL, single string.
                             break;
