@@ -46,7 +46,7 @@ namespace CorkBoard
             });
 
             settings = new Settings();
-            Test.runTests();
+            //Test.runTests();
 
             clktimer = 0;
             wxtimer = 0;
@@ -156,13 +156,15 @@ namespace CorkBoard
                     updateNews(2, list);
                     Console.WriteLine("Update News.");
                 }
-                updateAnnouncements();
+              //  updateAnnouncements();
             }
 
         }
         public void updateTime(string time)
         {
             TimeBlock.Text = time;
+            updateAnnouncements();
+
         }
 
         public void updateDay(string day)
@@ -254,7 +256,7 @@ namespace CorkBoard
             {
                 if (obj is PostController)
                 {
-                    toRemove.Add((PostController)obj);
+                   // toRemove.Add((PostController)obj);
                 }
             }
 
@@ -262,7 +264,7 @@ namespace CorkBoard
             {
                 if (toRemove[i] != null)
                 {
-                    MainView.Children.Remove(toRemove[i]);
+                   MainView.Children.Remove(toRemove[i]);
                 }
             }
 
