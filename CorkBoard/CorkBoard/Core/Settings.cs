@@ -218,9 +218,6 @@ namespace CorkBoard.Core
                                 case "time":
                                     timeVisible = false;
                                     break;
-                                case "date":
-                                    dateVisible = false;
-                                    break;
                                 case "news":
                                     newsVisible = false;
                                     break;
@@ -247,7 +244,7 @@ namespace CorkBoard.Core
 
                         case "wxrefresh":
                             if (!int.TryParse(iniargs[1], out int wxoutval))
-                            {
+                            {   
                                 Console.WriteLine("Error: Weather Refresh Parse Issue.");
                                 break;
                             }
